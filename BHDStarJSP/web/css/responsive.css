@@ -1,0 +1,14 @@
+@media (min-width: 900px) {
+	.main_header.fixed {
+		position: fixed;
+    	width: 100%;
+    	z-index: 999999999999;
+	}
+}
+
+@media (max-width: 1449px) {
+	#header .hotline {
+		margin-left: 75px;
+    	top: 25px;
+	}
+}
