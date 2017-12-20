@@ -1,0 +1,261 @@
+.lc-main,.lc-main-box {
+    width: 980px;
+    margin: 0 auto;
+}
+.lc-main-container {
+	width: 980px;
+	margin: 0 auto;
+    margin-left: 135px;
+}
+.main-container {
+	margin-top: 30px;
+}
+h3 {
+	margin: 0;
+    margin-bottom: 10px;
+    color: #222;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    text-rendering: optimizeSpeed;
+}
+
+/* show time */
+.lc-main-showtimes-title {
+    margin-top: 75px;
+}
+
+.nav-showtimes {
+    width: 21%;
+    margin: 0 auto;
+}
+.nav-showtimes .active .showtime-select-one:before {
+    background: url(../img/bg-icon-finger.png) no-repeat scroll 5px 50% #e71a0f;
+    content: "";
+    height: 40px;
+    padding-left: 40px;
+}
+.nav-tabs.nav-showtimes>li>a {
+    color: #fff!important;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: transparent; 
+    border: none;
+    border-bottom-color: transparent;
+    border-radius: 0;
+}
+.nav-tabs.nav-showtimes>li {
+    background-color: #e71a0f;
+}
+.nav-tabs.nav-showtimes>li:first-child a:after{
+    border-right: 1px solid #f2f2f2;
+    position: absolute;
+    top: 10px;
+    content: '';
+    width: 14px;
+    height: 50%;
+} 
+.nav-tabs.nav-showtimes>li:first-child:before{
+    background: url(../img/ribon_left_menu.gif) no-repeat scroll transparent;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -19px;
+    width: 59px;
+    height: 37px;
+}   
+.nav-tabs.nav-showtimes>li:last-child:before {
+    background: url(../img/ribon_right.gif) no-repeat scroll transparent;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -59px;
+    width: 59px;
+    height: 37px;
+}
+.nav-tabs.nav-showtimes>li.active>a:hover,.nav-tabs.nav-showtimes>li.active>a:focus {
+    background-color: transparent; 
+    border: none;
+    border-bottom-color: transparent;
+    border-radius: 0;
+}
+
+.nav-tabs.nav-showtimes-child {
+    margin-top: 50px;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    padding: 20px;
+}
+.nav-tabs.nav-showtimes-child>li>a,.nav-tabs.nav-showtimes-child>li.active>a:hover,.nav-tabs.nav-showtimes-child>li.active>a:focus {
+    background-color: transparent; 
+    border: none;
+    border-bottom-color: transparent;
+    border-radius: 0;
+}
+.nav-tabs.nav-showtimes-child>li {
+    height: 52px;
+    width: 77px;
+}
+.nav-tabs.nav-showtimes-child>li>a > span {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    font-size: 11px;
+    color: #000;
+}
+.nav-tabs.nav-showtimes-child>li>a > em {
+    position: absolute;
+    top: 20px;
+    left: 4px;
+    font-size: 11px;
+    color: #000;
+}
+.nav-tabs.nav-showtimes-child>li>a > strong {
+    font-size: 32px;
+    font-weight: normal;
+    left: 31px;
+    line-height: 32px;
+    position: absolute;
+    top: 8px;
+}
+.nav-tabs.nav-showtimes-child>li.active>a{
+    color: #000!important;
+}
+.nav-tabs.nav-showtimes-child>li>a {
+    color: #717171;
+}
+.nav-tabs.nav-showtimes-child>li.active {
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+.tabs-showtimes {
+    margin-top: 25px;
+}
+/* end showtime */
+
+/* tab showtime film   */
+
+.lc-main-showtimes-film-header > h3 > a {
+    color: #222;
+    margin-right: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.lc-main-showtimes-film-header > h3 > a:hover {
+    text-decoration: none;
+}
+.lc-main-showtimes-film-left {
+    width: 20%;
+}
+.lc-main-showtimes-film-right {
+    width: 79.5%;
+}
+.lc-main-showtimes-film-left,.lc-main-showtimes-film-right {
+    float: left;
+}
+.lc-main-showtimes-film-right > .showtimes-film-all >ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.lc-main-showtimes-film-right > .showtimes-film-tech {
+    margin-top: 5px;
+}
+.lc-main-showtimes-film-right > .showtimes-film-all >ul >li {
+    height: 48px;
+    width: 120px;
+    float: left;
+    margin: 2px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #cbcabe;
+}
+.lc-main-showtimes-film-right > .showtimes-film-all >ul >li:hover {
+    border: 1px solid #000;
+}
+.lc-main-showtimes-film-right > .showtimes-film-all >ul >li > a{
+    color: #fff;
+}
+.lc-main-showtimes-film-right > .showtimes-film-all >ul >li > a:hover{
+    text-decoration: none;
+}
+.clear-both {
+    clear: both;
+}
+hr {
+    border-bottom: 1px solid #000;
+}
+/* end tab showtime film  */
+
+/* table gia ve  */
+table,th,td {
+    border: 1px solid #636363;
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 18px;
+}
+table {
+}
+.table-ticket-col1 {
+    width: 16%;
+}
+.table-ticket-col3{
+    width: 42%;
+}
+.table-ticket-title {
+    font-size: 18px;
+    margin: 0;
+    width: 100%;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 7px 0;
+    font-weight: 300;
+    background-color: #333;
+}
+.ticket-day {
+    font-size: 12px;
+    font-weight: bold;
+    color: #636363;
+    line-height: 18px;
+    padding: 20px 0;
+}
+.ticket-cate {
+    font-size: 11px;
+    color: #636363;
+    line-height: 18px;
+}
+.value {
+    font-size: 18px;
+    color: #716e75;
+    font-weight: bold;
+}
+.value > .table-ticket-col1 {
+    padding: 15px;
+}
+.ticket-footer {
+    text-align: left;
+    padding: 10px;
+}
+.table-ticket-col3-nl {
+    width: 33%;
+    font-size: 15px;
+    color: #716e75;
+    padding: 30px;
+}
+.table-nl {
+    width: 100%;
+    margin-top: 50px;
+}
+.table-ticket-col1-nl {
+    font-size: 18px;
+    color: #716e75;
+    font-weight: bold;
+    padding: 7px;
+}
+/* end gia ve  */
+/* note  */
+.lc-main-note ul {
+    list-style: none;
+    padding: 0;
+}
+/* end note  */

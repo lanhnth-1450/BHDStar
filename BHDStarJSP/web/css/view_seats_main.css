@@ -1,0 +1,298 @@
+.lc-main,.lc-main-box {
+	width: 980px;
+	margin: 0 auto;
+}
+.lc-main-container {
+	width: 980px;
+	margin: 0 auto;
+}
+.clear-both {
+	clear: both;
+}
+/* book ticket header */
+.lc-main-book-ticket-header h3{
+	color: #f2f0e5;
+	font-size: 18px;
+	padding: 7px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.lc-main-book-ticket-header {
+	height: 33px;
+	line-height: 33px;
+	text-align: center;
+	background-color: #333333;
+	margin-top: 0px;
+}
+/* end book ticker header  */
+/* book site  */
+.lc-main-book-ticket-site{
+	width: 100%;
+	border-bottom: 2px solid #d4d3c9;
+	height: 68px;
+	background: #fff1ce;
+}
+.lc-main-book-ticket-site-left{
+	width: 65%;
+	padding: 10px 20px;
+	float: left;
+	position: relative;
+}
+.lc-main-book-ticket-site-left p {
+	font-size: 14px;
+}
+.lc-main-book-ticket-site-left:after {
+	border-right: 1px solid #000;
+	position: absolute;
+	top: 8px;
+	right: 0;
+	content: "";
+	height: 50px;
+	width: 2px;
+}
+.lc-main-book-ticket-site-right {
+	width: 35%;
+	float: left;
+	padding-left: 20px;
+	padding-top: 10px;
+	text-align: left;
+}
+.space {
+	margin-bottom: 5px;
+}
+.book-ticket-combo-left {
+	float: left;
+	width: 48%;
+	font-size: 11px;
+	font-weight: bold;
+}
+.book-ticket-combo-right {
+	float: left;
+	width: 51%;
+}
+.book-ticket-combo-right .icon-book {
+	display: block;
+	width: 15px;
+	height: 15px;
+	font-size: 0px;
+	background: url(../img/icon-info-combo.png) no-repeat center center;
+	float: left;
+	margin-top: 3px;
+	cursor: pointer;
+}
+.book-ticket-combo-right ul {
+	list-style: none;
+	padding-left:25px ;
+}
+.book-ticket-combo-right ul li {
+	float: left;
+	margin-right: 5px;
+}
+.book-ticket-combo-right ul li span {
+	display: block;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 19px;
+	background: #bcbdc0;
+	cursor: pointer;
+	color: #fff;
+}
+.book-ticket-combo-right ul li.active-combo-book span,.book-ticket-combo-right ul li.active-combo-book-online span {
+	background: #333333
+}
+/* end book site  */
+
+/* seatmap  */
+.lc-main-book-ticket-seatmap {
+	width: 100%;
+	height: 390px;
+	padding: 0px 2%;
+}
+.seatmap-left {
+	float: left;
+	width: 80%;
+}
+.seatmap-title {
+	width: 100%;
+	/*height: 45px;*/
+	margin: 20px auto 40px;
+	text-align: center;
+	background: url(../img/bg-screen.png) no-repeat  transparent;
+	background-size: 100% auto;
+}
+.seat-row {
+	text-align: center;
+	margin: 2px;
+}
+.box-seat {
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+	font-size: 12px;
+	line-height: 18px;
+	cursor: pointer;
+}
+.box-seat.standard {
+	border: 1px solid #01c73c
+}
+.box-seat.vip {
+	border: 1px solid #f71708
+}
+.box-seat.couple {
+	background: #3399cc;
+	color: #fff;
+}
+.box-seat.selected {
+	background: #00b10f!important;
+	border: none;
+	color: #fff;
+}
+.box-seat.disabled {
+	background: #bbb!important;
+	border: none;
+	color: #fff;
+}
+.seatmap-right {
+	float: left;
+	width: 20%;
+}
+.seatmap-right-content {
+	padding: 100px 0;
+}
+.seat-select {
+	width: 15px;
+	height: 15px;
+	padding: 0px 6px;
+	margin-right: 7px;
+}
+.seat-select.seat-choose {
+	background: #00b10f;
+}
+.seat-select.seat-choosed {
+	background: #bbb;
+}
+.seatmap-space {
+	margin: 20px;
+}
+.seat-select.seat-standard {
+	background: none;
+	border: 1px solid #01c73c
+}
+.seat-select.seat-vip {
+	background: none;
+	border: 1px solid #f71708
+}
+.seat-select.seat-couple {
+	background: #3399cc;
+}
+/* end seatmap */
+
+.lc-main-book-ticket-bottom {
+	width: 100%;
+	height: 155px;
+	background: #1d1d1c;
+	padding: 15px 0;
+}
+.lc-main-book-ticket-bottom .lc-main-book-ticket-bottom-prev a{
+	background: url(../img/bg-cgv-button-process.png) no-repeat;
+	background-position: -152px 0;
+	overflow: hidden;
+	display: block;
+	text-indent: -1000px;
+	margin: 10px 0px 0px 10px;
+	height: 108px;
+}
+
+.lc-main-book-ticket-bottom-prev {
+	float: left;
+	width: 12.5%;
+	height: 108px;
+}
+
+.lc-main-book-ticket-bottom .lc-main-book-ticket-bottom-next a{ 
+	background: url(../img/bg-cgv-button-process.png) no-repeat;
+	background-position: -152px -442px;
+	overflow: hidden;
+	text-indent: -1000px;
+	width: 106px;
+	height: 108px;
+	display: block;
+}
+.lc-main-book-ticket-bottom-next {
+	float: right;
+	width: 12.5%;
+	height: 108px;
+	margin: 10px 0 0 0;
+}
+.lc-main-book-ticket-bottom-main {
+	width: 75%;
+	float: left;
+}
+.lc-main-book-ticket-bottom-main .lc-main-book-ticket-bottom-col{
+	width: 33%;
+	float: left;
+	padding-right: 10px;  
+	min-height: 128px;
+}
+.bottom-img {
+	width: 40%;
+	float: left;
+}
+.bottom-img img {
+	width: 95%;
+}
+.bottom-content-film {
+	float: left;
+	width: 60%;    
+	padding-top: 15px;
+}
+.bottom-content-film p {
+	color: #cccccc;
+	font-size: 13px;
+	font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+	font-weight: normal;
+	padding-top: 5px;
+}
+.col-film-first {
+	border-right: 2px dotted #58595b;
+}
+
+.bottom-content-session {
+	color: #cccccc;
+	font-size: 12px;
+	font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+	font-weight: normal;
+	padding-top: 5px;
+}
+.bottom-content-session >  p {
+	padding: 0;
+	margin: 0;
+}
+.bottom-content-session >  p >span {
+	width: 45%;
+}
+
+.col-film-secound {
+	border-right: 2px dotted #58595b;
+	padding: 15px 5px 5px 30px;
+	width: 41%!important;
+}
+.bottom-content-price {
+	color: #cccccc;
+	font-size: 14px;
+	font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+	font-weight: normal;
+	padding-top: 5px;
+}
+.bottom-content-price >  p >span {
+	width: 45%;
+}
+.col-film-third {
+	padding: 15px 15px 15px 15px!important;
+	border-right: 2px dotted #58595b;
+	width: 25%!important;
+}
+.total {
+	color:#00ff16;
+}
