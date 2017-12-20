@@ -103,7 +103,8 @@ button{ border: none;}
 }
 #header .hotline {
 	position: absolute;
-    left: 50%;
+    top: 40%;
+    left: 55%;
     color: #ffffff;
     text-transform: uppercase;
     text-decoration: none;
@@ -426,6 +427,7 @@ button{ border: none;}
 	background-color: yellow; 
 	width: 100%;
 	height: auto;
+    margin-top: 30px;
 }
 .section--product-view {
     background: url(../images/bg-main.jpg) center -39px repeat;
@@ -489,7 +491,7 @@ button{ border: none;}
     height: 435px;
     margin: 0 auto;
 }
-.section--product-view  .list--film .slides li {
+.section--product-view  .list--film .slides .type-movies {
     max-width: 200px;
 	width: 200px;
     margin-right: 23px;
@@ -537,7 +539,7 @@ a.bhd-trailer-box.bhd-trailer {
 .meta-box-type span, .film--wrapper .product--view  .film--tech span {
 	display: inline-block;
     margin-top: 14px;
-    width: 29px;
+    width: 39px;
     height: 17px;
     font-family: 'Roboto', sans-serif;
     color: #fff;
@@ -563,6 +565,13 @@ a.bhd-trailer-box.bhd-trailer {
 .type-movies img:hover, .news--item img:hover {
 	transform: scale(1.1);
     z-index: 9999; 
+}
+.section--product-view  .list--film .scroll-wrapper .flex-viewport {
+    overflow: hidden;
+    position: relative;
+}
+.section--product-view  .list--film .scroll-wrapper .flex-viewport ul {
+    margin-left: 9%;    
 }
 .section--product-view  .list--film a {
     text-decoration: none;
@@ -634,7 +643,7 @@ a.bhd-trailer-box.bhd-trailer {
     float: left;
     display: block;
 	position: relative;
-    z-index: 3;    
+    z-index: 3;   
 }
 .section--member .img--card-member {
 	margin-bottom: 20px;
