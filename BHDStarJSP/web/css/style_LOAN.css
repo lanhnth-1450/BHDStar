@@ -247,7 +247,8 @@ a {
     display: inline;
     color: #d4dd29;
     text-decoration: underline;
-    text-decoration-color: #d4dd29 display: inline;
+    text-decoration-color: #d4dd29;
+    display: inline;
     border-bottom-color: #d4dd29;
 }
 
@@ -514,7 +515,7 @@ a {
     display: flex;
 }
 
-..product--view h3 {
+.product--view h3 {
     color: white;
     font-size: 18px;
     text-align: left;

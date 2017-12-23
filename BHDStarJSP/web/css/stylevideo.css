@@ -1,42 +1,53 @@
-.content--video {
-    background: #132028 url(../images/bg-cinema-10.png) center top repeat;
-    width: 100%;
-    height: 700px;
-    display: flow-root;
-}
 .player {
-	margin-left: 31%;
+    background-color: rgba(1, 1, 1, 1);
+    /*margin-left: 29%;
+    float: left;*/
+    text-align: center;
+    display: flex;
     float: left;
-    padding: 1em 1em .5em;
-    background-color: black;
-    border: 2px solid darkgreen;
-    border-radius: 9px;
+    position: fixed;
+    left: 50%;
+    margin-left: -18em;
+}
+.controls {
+    z-index: 99999;
+    text-align: center;
+    margin-top: 13px;    
+    display: block;
+    float: left;
+    position:fixed;
+    top: 70%;
+    left: 50%;
+    margin-left: -17em; /*set to a negative number 1/2 of your width*/
+
 }
 
-.controls {
-    border: 1px solid darkgreen;
-    width: 460px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    margin-top: 10px;
-    padding-bottom: 3px;
-    padding-top: 3px;
-    border-radius: 7px;
-    display: flex;
+.container {
+    position: relative;
+}
+
+.tag {
+    float: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    background-color: rgba(1, 1, 1, 0);
+    color: #FFFFFF;
+    font-weight: bold;
+    pointer-events: none;
 }
 
 video {
-   
-    width: 460px;
-    height: 240px;
-    background: black;
+    width: 600px;
+    height: 380px;
+    margin-top: 88px;
 }
 
 button {
     text-indent: -9999px;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border: none;
     cursor: pointer;
     margin-left: 10px;
@@ -44,33 +55,75 @@ button {
 }
 
 progress {
+    cursor: pointer;
     color: green;
     font-size: 12px;
-    width: 222px;
-    height: 5px;
+    
     border: none;
     margin-right: 10px;
     background: #434343;
     border-radius: 2px;
-  margin-left: 10px;
 }
 
 .preview {
-    background: url(../images/videocontrol/ic_replay.png) ;
+    background: url(../images/videocontrol/ic_replay.png);
 }
+
 .play {
-    background: url(../images/videocontrol/ic_play.png) ;
+    background: url(../images/videocontrol/ic_play.png);
 }
-.next {
-    background: url(../images/videocontrol/ic_next.png) ;
+
+.fast {
+    background: url(../images/videocontrol/ic_next.png);
 }
+
+.slow {
+    background: url(../images/videocontrol/ic_preview.png);
+}
+
 .volune {
-    background: url(../images/videocontrol/ic_volune.png) ;
+    background: url(../images/videocontrol/ic_volune.png);
 }
+
 .fullscreen {
-    background: url(../images/videocontrol/ic_fullscreen.png) ;
+    background: url(../images/videocontrol/ic_fullscreen.png);
 }
-.title--trailer h3{
+
+.title--trailer h3 {
     color: white;
-	text-align: center;
+    text-align: center;
+}
+.list--button{
+    margin-top: 5px;
+    display: flex;
+}
+
+.view--left{
+    float: left;
+    display: flex;
+}
+.view--right {
+    margin-left: 35%;
+    float: right;
+    display: flex;
+}
+.view--time {
+display: inline-flex;
+margin-left: 10px;
+margin-top: -17px; 
+}
+h5{
+    color: #ffffff;
+}
+#progress-volune{
+    width: 5em;
+    height: 5px;
+    margin-top: 11px;
+}
+#progress-bar{
+    width: 48em;
+    height: 5px;
+}
+.process-volune{
+    display: flex;
 }
