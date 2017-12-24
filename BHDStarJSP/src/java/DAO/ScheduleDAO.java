@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import model.Film;
 import model.Room;
 import model.Schedule;
+import model.Seat;
 
 /**
  *

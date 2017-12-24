@@ -6,16 +6,22 @@
 package controller;
 
 import DAO.FilmDAO;
+import DAO.ScheduleDAO;
 import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Film;
+import model.Schedule;
 
 /**
  *
@@ -62,11 +68,36 @@ public class DetailFilmServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             Connection con = DBConnection.getConnection();
-            FilmDAO filmDAO = new FilmDAO();
+            
             int film_id = Integer.parseInt(request.getParameter("film_id"));
+            
+            FilmDAO filmDAO = new FilmDAO();
             Film film = filmDAO.getFilm(con, film_id);
+            
+            ScheduleDAO scheduleDAO = new ScheduleDAO();
+
+            ArrayList<Schedule> listSchedule_1 = new ArrayList<Schedule>();
+            ArrayList<Schedule> listSchedule_2 = new ArrayList<Schedule>();
+            ArrayList<Schedule> listSchedule_3 = new ArrayList<Schedule>();
+            
+            ArrayList<Date> listDate = getListDate();
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            
+            Date date1 = listDate.get(0);
+            listSchedule_1 = scheduleDAO.getListScheduleByFilm(con, film, date1);
+            
+            Date date2 = listDate.get(1);
+            listSchedule_2 = scheduleDAO.getListScheduleByFilm(con, film, date2);
+            
+            Date date3 = listDate.get(2);
+            listSchedule_3 = scheduleDAO.getListScheduleByFilm(con, film, date3);
+            
             System.out.println(film.getId());
             request.setAttribute("film", film);
+            request.setAttribute("listDate", listDate);
+            request.setAttribute("listSchedule_1", listSchedule_1);
+            request.setAttribute("listSchedule_2", listSchedule_2);
+            request.setAttribute("listSchedule_3", listSchedule_3);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher("chitietphim.jsp?film_id="+film.getId());
             dispatcher.forward(request, response);
@@ -91,6 +122,25 @@ public class DetailFilmServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    
+    
+    public ArrayList<Date> getListDate() {
+        Date today = new Date(System.currentTimeMillis());
+        ArrayList<Date> list = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        list.add(today);
+        for (int i = 1; i < 7; i++) {
+            c.add(Calendar.DATE, 1);
+            Date currentDatePlusOne = new Date(c.getTimeInMillis());
+            list.add(currentDatePlusOne);
+            SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println(formatterDate.format(currentDatePlusOne));
+        }
+        System.out.println(list);
+        return list;
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

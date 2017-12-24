@@ -4,6 +4,14 @@
     Author     : DaiPhongPC
 --%>
 
+<%@page import="control.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="DAO.SeatDAO"%>
+<%@page import="model.Seat"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="model.Schedule"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Film"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,15 +24,24 @@
         <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
         <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <script type="text/javascript" src="js/chitietphim.js"></script>
+        
     </head>
     <body>
         <%
+            Connection con = DBConnection.getConnection();
+            SeatDAO seatDAO = new SeatDAO();
+
             Film film = (Film) request.getAttribute("film");
             film.setTrailer(film.getTrailer() + "?enablejsapi=1&controls=0");
-//            Film f = (Film) session.getAttribute("film");
-            
+
+            ArrayList<Date> listDate = (ArrayList<Date>) request.getAttribute("listDate");
+            ArrayList<Schedule> listSchedule_1 = (ArrayList<Schedule>) request.getAttribute("listSchedule_1");
+            ArrayList<Schedule> listSchedule_2 = (ArrayList<Schedule>) request.getAttribute("listSchedule_2");
+            ArrayList<Schedule> listSchedule_3 = (ArrayList<Schedule>) request.getAttribute("listSchedule_3");
+            ArrayList<Schedule> listSchedule = (ArrayList<Schedule>) request.getAttribute("listSchedule_1");
+            ArrayList<Seat> listSeat = new ArrayList<Seat>();
         %>
+
         <jsp:include page="view_component/header.jsp"></jsp:include>
             <div id="wrapper">
                 <div class="wraper--content">
@@ -121,18 +138,37 @@
                                                     <!-- Nav tabs -->
                                                     <!-- tab child -->
                                                     <ul class="nav nav-tabs nav-showtimes-child" role="tablist" style="background-color: #d2e2cb;">
-                                                        <li role="presentation" class="active">
-                                                            <a href="#theater1" aria-controls="theater1" role="tab" data-toggle="tab">
-                                                                <span>09</span>
-                                                                <em>Tue</em>
-                                                                <strong>26</strong>
+                                                        <% if (listDate != null) {
+                                                                String active = "active";
+                                                                SimpleDateFormat ft = new SimpleDateFormat("E");
+                                                                for (Date date : listDate) {
+                                                                    String thu = ft.format(date);
+                                                                    int thang = date.getMonth();
+                                                                    int ngay = date.getDate();
+                                                        %>
+                                                        <li role="presentation" class="<%=active%>">
+                                                            <a href="#<%=thu + ngay%>" aria-controls="<%=thu + ngay%>" role="tab" data-toggle="tab">
+                                                                <span><%= thang%></span>
+                                                                <em><%= thu%></em>
+                                                                <strong><%= ngay%></strong>
                                                             </a>
                                                         </li>
+                                                        <% active = "";
+                                                                }
+                                                            } %>
                                                     </ul>
                                                     <!-- end tab child -->
                                                     <!-- Tab panes  showtimes film-->
                                                     <div class="tab-content tabs-showtimes">
-                                                        <div role="tabpanel" class="tab-pane active" id="theater1" style="background-color: #25313c;">
+                                                        <% for (int i = 0; i <= 6; i++) {
+                                                                String active_1 = "active";
+                                                                SimpleDateFormat ft = new SimpleDateFormat("E");
+                                                                String thu = ft.format(listDate.get(i));
+                                                                int ngay = listDate.get(i).getDay();
+                                                                int thang = listDate.get(i).getMonth();
+                                                        %>
+                                                        <div role="tabpanel" class="tab-pane <%= active_1%>" id="<%=thu + ngay%>" style="background-color: #25313c;">
+
                                                             <!-- film -->
                                                             <div class="lc-main-showtimes-film">
                                                                 <div class="lc-main-showtimes-film-left">
@@ -145,176 +181,56 @@
                                                                     </div>
                                                                     <!-- end poster -->
                                                                 </div>
+                                                                        
                                                                 <div class="lc-main-showtimes-film-right">
+                                                                    <%
+                                                                        if (i <= 2) {
+                                                                            if (i == 0) {
+                                                                                listSchedule = listSchedule_1;
+                                                                            }
+                                                                            if (i == 1) {
+                                                                                listSchedule = listSchedule_2;
+                                                                            }
+                                                                            if (i == 2) {
+                                                                                listSchedule = listSchedule_3;
+                                                                            }
+                                                                    %>
+                                                                    <div class="showtimes-film-tech">
+                                                                        <strong>2D Phụ Đề Việt</strong>
+                                                                    </div>
                                                                     <div class="showtimes-film-all">
                                                                         <!-- time list -->
                                                                         <ul class="time_list">
+                                                                            <%
+                                                                                for (Schedule schedule : listSchedule) {
+                                                                                listSeat = seatDAO.getNumberSeated(con, schedule.getId());
+                                                                            %>
+                                                                            <li>
+                                                                                <a href="BookTicketServlet?film_id=<%=film.getId()%>&schedule_id=<%=schedule.getId()%>">
+                                                                                    <span><%=schedule.getTime()%></span>
+                                                                                    <br>
+                                                                                    <span>Số ghế trống: <%= listSeat.size()%></span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% listSeat = new ArrayList<Seat>(); }
+                                                                            %>
 
-                                                                        </ul>
-
-                                                                        <!-- end time list -->
-                                                                    </div>
-
-                                                                    <div class="showtimes-film-tech">
-                                                                        <strong>2D Phụ Đề Việt</strong>
-                                                                    </div>
-                                                                    <div class="showtimes-film-all">
-                                                                        <!-- time list -->
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>14:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>15:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>16:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>17:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>18:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
                                                                         </ul>
                                                                         <!-- end time list -->
                                                                     </div>
-                                                                    <div class="clear-both"></div>
-                                                                    <div class="showtimes-film-tech">
-                                                                        <strong>3D Phụ Đề Việt</strong>
-                                                                    </div>
-                                                                    <div class="showtimes-film-all">
-                                                                        <!-- time list -->
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>14:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>15:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <!-- end time list -->
-                                                                    </div>
+                                                                    <% } else {%>
+                                                                    <p>Hiện chưa có lịch chiếu cho  ngày này</p>    
+                                                                    <% }%>
                                                                 </div>
                                                             </div>
                                                             <div class="clear-both"></div>
                                                             <hr>
                                                             <!-- end film -->
                                                         </div>
-                                                        <div role="tabpanel" class="tab-pane" id="theater2" style="background-color: aliceblue;">
-                                                            <div class="lc-main-showtimes-film">
-                                                                <div class="lc-main-showtimes-film-left">
-                                                                    <!-- poster -->
-                                                                    <div class="lc-main-showtimes-film-poster">
-                                                                        <a href="#" title="IT: Chú Hề Ma Quái">
-                                                                            <img src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="IT: Chú Hề Ma Quái">
-                                                                        </a>
-                                                                    </div>
-                                                                    <!-- end poster -->
-                                                                </div>
-                                                                <div class="lc-main-showtimes-film-right">
-                                                                    <div class="showtimes-film-tech">
-                                                                        <strong>2D Phụ Đề Việt</strong>
-                                                                    </div>
-                                                                    <div class="showtimes-film-all">
-                                                                        <!-- time list -->
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>14:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>15:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>16:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>17:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>18:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <!-- end time list -->
-                                                                    </div>
-                                                                    <div class="clear-both"></div>
-                                                                    <div class="showtimes-film-tech">
-                                                                        <strong>3D Phụ Đề Việt</strong>
-                                                                    </div>
-                                                                    <div class="showtimes-film-all">
-                                                                        <!-- time list -->
-                                                                        <ul>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>14:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#">
-                                                                                    <span>15:20 PM</span>
-                                                                                    <br>
-                                                                                    <span>89 ghế trống</span>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                        <!-- end time list -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clear-both"></div>
-                                                            <hr>
-                                                            <!-- end film -->
-                                                        </div>
+
+                                                        <%  active_1 = "";
+                                                            }
+                                                        %>   
                                                     </div>
                                                     <!-- end showtimes film -->
                                                 </div>
@@ -341,53 +257,9 @@
             }
         </style>
         <script src="js/jquery-1.10.2.min.js"></script>
-        <script>
-                                $(document).ready(function () {
-                                    function createDivAtrr(code, attrName, attrValue) {
-                                        return $(document.createElement(code)).attr(attrName, attrValue);
-                                    }
-
-                                    function createSuatChieu(ten_phim, ngay_chieu, gio_chieu, so_ghe_trong) {
-                                        console.log(createDivAtrr('a', 'href', '#'));
-                                        var li = $(document.createElement('li'));
-                                        var a = createDivAtrr('a', 'href', 'view_seats.html');
-                                        var span1 = $(document.createElement('span')).text(gio_chieu);
-                                        var br = $(document.createElement('br'));
-                                        var span2 = $(document.createElement('span')).text(so_ghe_trong + ' ghế trống');
-                                        console.log(span2);
-                                        a.append(span1, br, span2);
-                                        li.append(a);
-                                        return li;
-                                    }
-
-                                    $(window).load(function () {
-
-                                        fetch('kingmans.json')
-                                                .then((resp) => resp.json())
-                                                .then(function (data) {
-                                                    let all = data;
-                                                    $.each(all, function (key, value) {
-                                                        var li = createSuatChieu(
-                                                                value.ten_phim,
-                                                                value.ngay_chieu,
-                                                                value.gio_chieu,
-                                                                value.so_ghe_trong,
-                                                                );
-                                                        if (value.status == "no") {
-                                                            li.addClass('red');
-                                                            li.children().css("cursor", "not-allowed");
-                                                        } else {
-                                                            li.addClass('green');
-                                                        }
-                                                        $('.time_list').append(li);
-                                                    });
-                                                }).catch(function (error) {
-                                            console.log(error);
-                                        });
-                                    });
-
-                                });
-        </script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/chitietphim.js"></script>
         <jsp:include page="view_component/footer.jsp"></jsp:include>
     </body>
 </html>

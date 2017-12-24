@@ -8,6 +8,10 @@
         <servlet-name>SingUpServlet</servlet-name>
         <servlet-class>control.SingUpServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookTicketServlet</servlet-name>
+        <servlet-class>controller.BookTicketServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>DetailFilmServlet</servlet-name>
         <url-pattern>/DetailFilmServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookTicketServlet</servlet-name>
+        <url-pattern>/BookTicketServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
