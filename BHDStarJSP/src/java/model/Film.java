@@ -20,7 +20,6 @@ public class Film implements Serializable {
     private int runningTime;
     private float vote;
     private String des, trailer, poster;
-    private ArrayList<Category> categories;
 
     public Film() {
     }
@@ -59,19 +58,6 @@ public class Film implements Serializable {
         this.trailer = trailer;
     }
     
-    public Film(int id, String name, String productCountry, Date realeaseDate, int runningTime, float vote, String des, String trailer, String poster, ArrayList<Category> categories) {
-        this.id = id;
-        this.name = name;
-        this.productCountry = productCountry;
-        this.realeaseDate = realeaseDate;
-        this.runningTime = runningTime;
-        this.vote = vote;
-        this.des = des;
-        this.trailer = trailer;
-        this.poster = poster;
-        this.categories = categories;
-    }
-
     public int getId() {
         return id;
     }
@@ -142,13 +128,5 @@ public class Film implements Serializable {
 
     public void setPoster(String poster) {
         this.poster = poster;
-    }
-
-    public ArrayList<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<Category> categories) {
-        this.categories = categories;
     }
 }

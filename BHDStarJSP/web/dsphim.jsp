@@ -44,6 +44,10 @@
                 </div>
             </div>
         <jsp:include page="view_component/footer.jsp"></jsp:include>
+        <script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/video.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
         <script>
 		$(document).ready(function(){
 			var baseUrlImg = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2';
