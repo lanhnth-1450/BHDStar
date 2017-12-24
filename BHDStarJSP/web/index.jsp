@@ -52,7 +52,7 @@
                                                 <span class="film--rating">C 18</span>
                                                 <span class="tech--2d">2D</span>
                                             </span>
-                                            <a href="chitietphim_lanh.jsp">
+                                            <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId() %>">
                                                 <img src="<%=listFilm.get(i).getPoster()%>">
                                             </a>
                                             <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId() %>">

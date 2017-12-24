@@ -10,6 +10,7 @@ import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,10 +63,13 @@ public class DetailFilmServlet extends HttpServlet {
             throws ServletException, IOException {
             Connection con = DBConnection.getConnection();
             FilmDAO filmDAO = new FilmDAO();
-            int id = Integer.parseInt(request.getParameter("film_id"));
-            Film film = filmDAO.getFilm(con, id);
+            int film_id = Integer.parseInt(request.getParameter("film_id"));
+            Film film = filmDAO.getFilm(con, film_id);
+            System.out.println(film.getId());
+            request.setAttribute("film", film);
             
-            processRequest(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("chitietphim.jsp?film_id="+film.getId());
+            dispatcher.forward(request, response);
     }
 
     /**
