@@ -16,6 +16,14 @@
         <servlet-name>SingUpServlet</servlet-name>
         <url-pattern>/SingUpServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchFilm</servlet-name>
+        <servlet-class>controller.ServletDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchFilm</servlet-name>
+        <url-pattern>/SearchFilm</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
