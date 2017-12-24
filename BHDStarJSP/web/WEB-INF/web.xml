@@ -8,6 +8,7 @@
         <servlet-name>SearchFilm</servlet-name>
         <url-pattern>/SearchFilm</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

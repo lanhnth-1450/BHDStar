@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video</title>
+    <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
+</head>
+
+<body>
+    <script type="text/javascript" src="js/video.js"></script>
+    <div class="container">
+        <div class="player">
+            <video id="video--view" controls=false onclick="playvideo()">
+                <source id="mp4" src="videos/trailer.mp4" type="video/mp4"></source>
+                Your user agent does not support the HTML5 Video element.
+            </video>
+        </div>
+        <div class="controls">
+            <div class="process">
+                <progress id="progress-bar" value="0" min="0" max="100" onclick="onclickproresbar()">0% played</progress>
+            </div>
+            <div class="list--button">
+                <div class="view--left">
+                    <button id="btnlowmotion" class="slow" onclick="slowspeed()"> Slow</button>
+                    <button id="btnfastmotion" class="fast" onclick="fastspeed()"> Fast</button>
+                    <button id="btnpreview" class="preview" onclick="previewvideo()"> Preview</button>
+                    <button id="btnplay" class="play" onclick="playvideo()">Play</button>
+                    <div class="view--time">
+                        <h5 id="curentime">00:00</h5>
+                        <h5>/</h5>
+                        <h5 id="durationtime">00:00</h5>
+                    </div>
+                </div>
+                <div class="view--right">
+                    <div class="process-volune">
+                        <button id="btnvolue" class="volune" onclick="changeVolume()"> 0% player</button>
+                        <progress id="progress-volune" value="0" min="0" max="100" onclick="onclickproresbar()">0% played</progress>
+                    </div>
+                    <button id="btnfullscreen" class="fullscreen" onclick="fullscreen()"> Full Screen</button>
+                </div>
+            </div>
+        </div>
+        <img class="tag" src="images/background1.png" width="1349" height="648">
+    </div>
+</body>
+
+</html>
