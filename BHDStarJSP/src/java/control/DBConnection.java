@@ -19,14 +19,14 @@ public class DBConnection {
     static Connection con;
     static String url;
     static String username = "root";
-    static String password = "";
+    static String password = "lanh";
     
     public static Connection getConnection() {
         if (con != null) {
             return con;
         }
         try {
-            String url = "jdbc:mysql://localhost:3306/dbbhd";
+            String url = "jdbc:mysql://localhost:3306/bhdstar";
             Class.forName("com.mysql.jdbc.Driver");
             try {
                 con = DriverManager.getConnection(url, username, password);

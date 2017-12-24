@@ -20,19 +20,17 @@ public class Schedule implements Serializable {
     private Room room;
     private Film film;
     private double price;
-    private Sale sale;
 
     public Schedule() {
     }
 
-    public Schedule(int id, Time time, Date date, Room room, Film film, double price, Sale sale) {
+    public Schedule(int id, Time time, Date date, Room room, Film film, double price) {
         this.id = id;
         this.time = time;
         this.date = date;
         this.room = room;
         this.film = film;
         this.price = price;
-        this.sale = sale;
     }
 
     public int getId() {
@@ -83,13 +81,4 @@ public class Schedule implements Serializable {
         this.price = price;
     }
 
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
-    }
-    
-    
 }

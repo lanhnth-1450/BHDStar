@@ -18,7 +18,7 @@
                     <div id="menu"></div>
                     <div id="header">
                         <div class="header--top">
-                            <a href="index.html" class="logo">
+                            <a href="index.jsp" class="logo">
                                 <img alt="" class="logo" src="images/logo.png">
                             </a>
                             <ul class="list--social">
@@ -66,8 +66,8 @@
                                     Đăng ký
                                 </div>
                                 <div class="top-search-form">
-                                    <form>
-                                        <input type="text" name="search" placeholder="Search.." onfocus="focusFunction()">
+                                    <form action="">
+                                        <input type="text" id="search" placeholder="Search.." onkeyup="showResult(this.value)">
                                         <!-- <ul id="myUL" class="showResult">
                                          <li><a href="#">Adele</a></li>
                                          <li><a href="#">Agnes</a></li>
@@ -80,7 +80,8 @@
                                          <li><a href="#">Cindy</a></li>
                                        </ul> -->
                                     </form>
-                                    <div class="result" style="display: none">
+                                    <p><span id="resultSearchFilm"> </span></p>
+                                    <div class="result" style="display: none" id="resultSearchFilm">
                                         <ul>
                                             <li>
                                                 <a href="#">Siêu bão địa cầu Siêu bão địa cầu</a>
@@ -98,5 +99,25 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            function showResult(str) 
+            {
+                if (str.length == 0) {
+                    document.getElementById("resultSearchFilm").innerHTML="";
+                    return;
+                } else {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange()=function() {
+                        if (xmlHttp.readyState == 4 && xmlHttp.status = 200) {
+                            document.getElementById("resultSearchFilm").innerHTML=xmlHttp.responseText;
+                        }
+                    }
+                    xmlHttp.open("GET", "SearchFilmServlet?q="+str, true);
+                    xmlHttp.send();
+                }
+                
+            }
+        </script>
     </body>
 </html>
