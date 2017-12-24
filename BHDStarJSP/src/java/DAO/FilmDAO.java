@@ -24,7 +24,7 @@ public class FilmDAO {
     public ArrayList<Film> getListFilm(Connection con) {
         ArrayList<Film> listFilm = new ArrayList<Film>();
         try {
-            String sql = "SELECT * FROM film";
+            String sql = "SELECT * FROM film order by film.name";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

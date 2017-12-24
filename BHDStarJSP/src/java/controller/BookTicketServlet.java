@@ -5,27 +5,26 @@
  */
 package controller;
 
+import DAO.FilmDAO;
+import DAO.SeatDAO;
 import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Film;
+import model.Seat;
 
 /**
  *
  * @author Lanh
  */
-@WebServlet(name = "SearchFilmServlet", urlPatterns = {"/SearchFilmServlet"})
-public class SearchFilmServlet extends HttpServlet {
+public class BookTicketServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +35,6 @@ public class SearchFilmServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -45,34 +43,12 @@ public class SearchFilmServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchFilmServlet</title>");
+            out.println("<title>Servlet BookTicketServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet lala at " + request.getContextPath() + "</h1>");
-            
-            out.println("<div class=\"result\" style=\"display: none\" id=\"resultSearchFilm\">");
-            out.println("<ul>");
-            out.println("<li>");
-            String nameFilm = request.getParameter("q");
-            Statement st = null;
-            ResultSet res = null;
-            
-            try {
-                Connection con = DBConnection.getConnection();
-                String sql = "SELECT name FROM film WHERE film.name like '"+nameFilm+"%'ORDER BY name";
-                st = con.createStatement();
-                res = st.executeQuery(sql);
-                while(res.next()) {
-                    out.println("<a href=\"#\">lalala1 res.getString(0);</a>");
-                }
-            } catch (SQLException ex) {
-                out.println(ex.toString());
-            }
-            out.println("</ul>");
-            out.println("</li>");
-            out.println("</div>");
+            out.println("<h1>Servlet BookTicketServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
             out.println("</html>");
-            
         }
     }
 
@@ -88,15 +64,24 @@ public class SearchFilmServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String search = request.getParameter("search");
-        response.setContentType("text/html");
-        if (!((search.trim()).equals(""))) {
-            String searchString = getSearchResult(search);
-            response.getWriter().write(searchString);
-        } else {
-            response.getWriter().write("");
-        }
-        processRequest(request, response);
+        Connection con = DBConnection.getConnection();
+            
+        int film_id = Integer.parseInt(request.getParameter("film_id"));
+        int schedule_id = Integer.parseInt(request.getParameter("schedule_id"));
+        
+        FilmDAO filmDAO = new FilmDAO();
+        Film film = filmDAO.getFilm(con, film_id);
+            
+        SeatDAO seatDAO = new SeatDAO();
+        ArrayList<Seat> listSeat = new ArrayList<Seat>();
+        listSeat = seatDAO.getNumberSeated(con, schedule_id);
+        
+        System.out.println(film.getId());
+        request.setAttribute("film", film);
+        request.setAttribute("listSeat", listSeat);
+           
+        RequestDispatcher dispatcher = request.getRequestDispatcher("bookTicket.jsp?film_id="+film.getId());
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -112,28 +97,7 @@ public class SearchFilmServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
-    public String getSearchResult(String search) {
-        Connection conn = DBConnection.getConnection();
-        Statement st = null;
-        ResultSet res = null;
-        String finalSearch = "";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            st = conn.createStatement();
-            String s = "SELECT name FROM film WHERE film.name like '"+search+"%'ORDER BY name";
-//            SELECT name FROM film WHERE film.name like 'Coco' ORDER BY name
-            res = st.executeQuery(s);
-            while (res.next()) {
-                String un = res.getString(1);
-                finalSearch += un + "\n";
-            }
-            st.close();
-            conn.close();
-        } catch (Exception e) {
-        }
-        return finalSearch;
-    }
+
     /**
      * Returns a short description of the servlet.
      *
