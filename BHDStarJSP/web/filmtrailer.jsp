@@ -1,16 +1,30 @@
+<%-- 
+    Document   : filmtrailer
+    Created on : Dec 24, 2017, 12:25:54 AM
+    Author     : DaiPhongPC
+--%>
+
+<%@page import="model.Film"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
+   
 <head>
     <title>Video</title>
     <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
 </head>
 
 <body>
+     <% 
+      Film f=new Film();
+                    f.setTrailer("https://www.youtube.com/embed/Ga6RYejo6Hk"+"?enablejsapi=1&controls=0");
+//         Film f = (Film) session.getAttribute("film");
+     
+     %>
     <script type="text/javascript" src="js/video.js"></script>
     <div class="container">
         <div class="player">
-            <iframe id="video--view" width="640" height="360" src="https://www.youtube.com/watch?v=Ga6RYejo6Hk?enablejsapi=1&controls=0" frameborder="0" style="border: solid 4px #37474F"></iframe>
+            <iframe id="video--view" width="640" height="360" src="<%= f.getTrailer()%>" frameborder="0" style="border: solid 4px #37474F"></iframe>
         </div>
         <div class="controls">
             <div class="process">
@@ -40,5 +54,4 @@
         <img class="tag" src="images/bg-video.png" width="700" height="540">
     </div>
 </body>
-
 </html>

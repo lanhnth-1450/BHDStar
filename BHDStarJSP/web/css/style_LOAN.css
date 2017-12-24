@@ -594,7 +594,7 @@ a {
 button.mfp-close, button.mfp-arrow {
     overflow: visible;
     cursor: pointer;
-    background: transparent;
+    background: url(../images/videocontrol/ic_close.png);
     border: 0;
     -webkit-appearance: none;
     display: block;
@@ -606,9 +606,9 @@ button.mfp-close, button.mfp-arrow {
     box-shadow: none;
 }
 .mfp-close {
-    width: 44px;
-    height: 44px;
-    line-height: 44px;
+    width: 27px;
+    height: 27px;
+    line-height: 26px;
     position: absolute;
     right: 0;
     top: 0;
@@ -621,9 +621,79 @@ button.mfp-close, button.mfp-arrow {
     font-style: normal;
     font-size: 28px;
     font-family: Arial, Baskerville, monospace;
+     background: url(../images/videocontrol/ic_close.png);
 }
 .mfp-close, .mfp-arrow, .mfp-preloader, .mfp-counter {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+}
+.col-md-6{
+    float: left;
+}
+.widget--right{
+    margin-bottom: 30px;
+    margin-left:70px; 
+    margin-right: 70px;
+}
+.page--member .title--membe{
+    margin: 0 0 22px;
+font-size: 20px;
+font-weight: 400;
+line-height: 33px;
+}
+.page--member .member--login {
+    padding: 32px 25px;
+    background: #1c262f;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+.page--member .form--inside {
+    line-height: 35px;
+    color: #bfc9d2;
+}
+.box--login .forgot--link, .form--inside {
+    font-size: 15px;
+}
+.page--member .form--inside .controls {
+    display: block;
+    position: relative;
+    margin-bottom: 15px;
+    font-family: "Roboto",sans-serif;
+    line-height: 35px;
+}
+.page--member .form--inside .controls .inp--text {
+    padding-left: 15px;
+    background: #37424b;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+.page--member .form--inside .btn--yolo {
+    display: inline-block;
+    height: 47px;
+    margin-left: 175px;
+    color: #fff;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    outline: none;
+    border: none;
+    background: #42af33 url(../images/bg-button-yolo.png) 0 0 no-repeat;
+    font-family: "Roboto",sans-serif;
+    font-size: 18px;
+}
+.form--inside{
+    background: #1c262f;
+    padding-left: 35px;
+    margin-left:70px; 
 }

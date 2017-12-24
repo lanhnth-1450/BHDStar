@@ -4,6 +4,7 @@
     Author     : DaiPhongPC
 --%>
 
+<%@page import="model.Film"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +19,12 @@
         <script type="text/javascript" src="js/chitietphim.js"></script>
     </head>
     <body>
+        <%
+            Film f=new Film();
+                    f.setTrailer("https://www.youtube.com/embed/Ga6RYejo6Hk"+"?enablejsapi=1&controls=0");
+//            Film f = (Film) session.getAttribute("film");
+        %>
         <jsp:include page="view_component/header.jsp"></jsp:include>
-        <jsp:include page="view_component/slide.jsp"></jsp:include>
             <div id="wrapper">
                 <div class="wraper--content">
                     <div class="film--wrapper">
@@ -90,178 +95,179 @@
                                     </div>
                                 </div>
                                 <div class="mfp-content" onclick="clicktrailer()">
-                                    <div class="mfp-iframe-scaler" style="display: none;" id="frame-trailer">
-                                        <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-                                        <iframe class="mfp-iframe" src="videotrailer.html" allowfullscreen="" frameborder="0"></iframe>
-                                    </div>
+                                    <div class="mfp-iframe-scaler"  style="display: none;" id="frame-trailer">
+                                        <button title="Close (Esc)" type="button"  class="mfp-close">×</button>
+                                        <iframe class="mfp-iframe" 
+                                                src="filmtrailer.jsp" allowfullscreen="" frameborder="0"></iframe>
                                 </div>
                             </div>
-                            <!-- main-container -->
-                            <div class="lc-main-container">
-                                <!-- showtime -->
-                                <div class="lc-main-showtimes-title">
-                                    <div role="tabpanel" class="lc-main-showtimes-tabs">
-                                        <!-- Tab panes -->
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active" id="lichchieu">
-                                                <!-- lich  -->
-                                                <div class="lc-main-showtimes">
-                                                    <div role="tabpanel">
-                                                        <!-- Nav tabs -->
-                                                        <!-- tab child -->
-                                                        <ul class="nav nav-tabs nav-showtimes-child" role="tablist" style="background-color: #d2e2cb;">
-                                                            <li role="presentation" class="active">
-                                                                <a href="#theater1" aria-controls="theater1" role="tab" data-toggle="tab">
-                                                                    <span>09</span>
-                                                                    <em>Tue</em>
-                                                                    <strong>26</strong>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <!-- end tab child -->
-                                                        <!-- Tab panes  showtimes film-->
-                                                        <div class="tab-content tabs-showtimes">
-                                                            <div role="tabpanel" class="tab-pane active" id="theater1" style="background-color: #25313c;">
-                                                                <!-- film -->
-                                                                <div class="lc-main-showtimes-film">
-                                                                    <div class="lc-main-showtimes-film-left">
-                                                                        <!-- poster -->
-                                                                        <div class="lc-main-showtimes-film-poster">
-                                                                            <a href="#" title="Amityville: Quỷ Dữ Thức Tỉnh">
-                                                                                <img style="width: 185px;"
-                                                                                     src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="Amityville: Quỷ Dữ Thức Tỉnh">
-                                                                            </a>
-                                                                        </div>
-                                                                        <!-- end poster -->
+                        </div>
+                        <!-- main-container -->
+                        <div class="lc-main-container">
+                            <!-- showtime -->
+                            <div class="lc-main-showtimes-title">
+                                <div role="tabpanel" class="lc-main-showtimes-tabs">
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="lichchieu">
+                                            <!-- lich  -->
+                                            <div class="lc-main-showtimes">
+                                                <div role="tabpanel">
+                                                    <!-- Nav tabs -->
+                                                    <!-- tab child -->
+                                                    <ul class="nav nav-tabs nav-showtimes-child" role="tablist" style="background-color: #d2e2cb;">
+                                                        <li role="presentation" class="active">
+                                                            <a href="#theater1" aria-controls="theater1" role="tab" data-toggle="tab">
+                                                                <span>09</span>
+                                                                <em>Tue</em>
+                                                                <strong>26</strong>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <!-- end tab child -->
+                                                    <!-- Tab panes  showtimes film-->
+                                                    <div class="tab-content tabs-showtimes">
+                                                        <div role="tabpanel" class="tab-pane active" id="theater1" style="background-color: #25313c;">
+                                                            <!-- film -->
+                                                            <div class="lc-main-showtimes-film">
+                                                                <div class="lc-main-showtimes-film-left">
+                                                                    <!-- poster -->
+                                                                    <div class="lc-main-showtimes-film-poster">
+                                                                        <a href="#" title="Amityville: Quỷ Dữ Thức Tỉnh">
+                                                                            <img style="width: 185px;"
+                                                                                 src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="Amityville: Quỷ Dữ Thức Tỉnh">
+                                                                        </a>
                                                                     </div>
-                                                                    <div class="lc-main-showtimes-film-right">
-                                                                        <div class="showtimes-film-all">
-                                                                            <!-- time list -->
-                                                                            <ul class="time_list">
+                                                                    <!-- end poster -->
+                                                                </div>
+                                                                <div class="lc-main-showtimes-film-right">
+                                                                    <div class="showtimes-film-all">
+                                                                        <!-- time list -->
+                                                                        <ul class="time_list">
 
-                                                                            </ul>
+                                                                        </ul>
 
-                                                                            <!-- end time list -->
-                                                                        </div>
+                                                                        <!-- end time list -->
                                                                     </div>
                                                                 </div>
-                                                                <div class="clear-both"></div>
-                                                                <hr>
-                                                                <!-- end film -->
                                                             </div>
-                                                            <div role="tabpanel" class="tab-pane" id="theater2" style="background-color: aliceblue;">
-                                                                <div class="lc-main-showtimes-film">
-                                                                    <div class="lc-main-showtimes-film-left">
-                                                                        <!-- poster -->
-                                                                        <div class="lc-main-showtimes-film-poster">
-                                                                            <a href="#" title="IT: Chú Hề Ma Quái">
-                                                                                <img src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="IT: Chú Hề Ma Quái">
-                                                                            </a>
-                                                                        </div>
-                                                                        <!-- end poster -->
-                                                                    </div>
-                                                                    <div class="lc-main-showtimes-film-right">
-                                                                        <div class="showtimes-film-tech">
-                                                                            <strong>2D Phụ Đề Việt</strong>
-                                                                        </div>
-                                                                        <div class="showtimes-film-all">
-                                                                            <!-- time list -->
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>14:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>15:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>16:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>17:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>18:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <!-- end time list -->
-                                                                        </div>
-                                                                        <div class="clear-both"></div>
-                                                                        <div class="showtimes-film-tech">
-                                                                            <strong>3D Phụ Đề Việt</strong>
-                                                                        </div>
-                                                                        <div class="showtimes-film-all">
-                                                                            <!-- time list -->
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>14:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">
-                                                                                        <span>15:20 PM</span>
-                                                                                        <br>
-                                                                                        <span>89 ghế trống</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                            <!-- end time list -->
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="clear-both"></div>
-                                                                <hr>
-                                                                <!-- end film -->
-                                                            </div>
+                                                            <div class="clear-both"></div>
+                                                            <hr>
+                                                            <!-- end film -->
                                                         </div>
-                                                        <!-- end showtimes film -->
+                                                        <div role="tabpanel" class="tab-pane" id="theater2" style="background-color: aliceblue;">
+                                                            <div class="lc-main-showtimes-film">
+                                                                <div class="lc-main-showtimes-film-left">
+                                                                    <!-- poster -->
+                                                                    <div class="lc-main-showtimes-film-poster">
+                                                                        <a href="#" title="IT: Chú Hề Ma Quái">
+                                                                            <img src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="IT: Chú Hề Ma Quái">
+                                                                        </a>
+                                                                    </div>
+                                                                    <!-- end poster -->
+                                                                </div>
+                                                                <div class="lc-main-showtimes-film-right">
+                                                                    <div class="showtimes-film-tech">
+                                                                        <strong>2D Phụ Đề Việt</strong>
+                                                                    </div>
+                                                                    <div class="showtimes-film-all">
+                                                                        <!-- time list -->
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>14:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>15:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>16:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>17:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>18:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <!-- end time list -->
+                                                                    </div>
+                                                                    <div class="clear-both"></div>
+                                                                    <div class="showtimes-film-tech">
+                                                                        <strong>3D Phụ Đề Việt</strong>
+                                                                    </div>
+                                                                    <div class="showtimes-film-all">
+                                                                        <!-- time list -->
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>14:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <span>15:20 PM</span>
+                                                                                    <br>
+                                                                                    <span>89 ghế trống</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <!-- end time list -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear-both"></div>
+                                                            <hr>
+                                                            <!-- end film -->
+                                                        </div>
                                                     </div>
+                                                    <!-- end showtimes film -->
                                                 </div>
-                                                <!-- end lich -->
                                             </div>
+                                            <!-- end lich -->
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end showtime -->
-
                             </div>
+                            <!-- end showtime -->
+
                         </div>
                     </div>
                 </div>
             </div>
-            <style type="text/css">
-                .red {
-                    border: 1px solid red!important;
-                    cursor:not-allowed!important;
-                }
-                .green {
-                    border: 1px solid green!important;
-                }
-            </style>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script>
+        </div>
+        <style type="text/css">
+            .red {
+                border: 1px solid red!important;
+                cursor:not-allowed!important;
+            }
+            .green {
+                border: 1px solid green!important;
+            }
+        </style>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script>
                                     $(document).ready(function () {
                                         function createDivAtrr(code, attrName, attrValue) {
                                             return $(document.createElement(code)).attr(attrName, attrValue);
@@ -307,7 +313,7 @@
                                         });
 
                                     });
-            </script>
+        </script>
         <jsp:include page="view_component/footer.jsp"></jsp:include>
     </body>
 </html>
