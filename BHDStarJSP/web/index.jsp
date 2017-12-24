@@ -55,7 +55,7 @@
                                             <a href="chitietphim_lanh.jsp">
                                                 <img src="<%=listFilm.get(i).getPoster()%>">
                                             </a>
-                                            <a href="#">
+                                            <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId() %>">
                                                 <span class="movie--name"><%=listFilm.get(i).getName()%></span>
                                             </a>
                                         </div>

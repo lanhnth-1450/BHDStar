@@ -20,9 +20,17 @@
         <servlet-name>SearchFilm</servlet-name>
         <servlet-class>controller.ServletDemo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetailFilmServlet</servlet-name>
+        <servlet-class>controller.DetailFilmServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SearchFilm</servlet-name>
         <url-pattern>/SearchFilm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailFilmServlet</servlet-name>
+        <url-pattern>/DetailFilmServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,14 +17,14 @@ public class Schedule implements Serializable {
     private int id;
     private Time time;
     private Date date;
+    private double price;
     private Room room;
     private Film film;
-    private double price;
-
+    
     public Schedule() {
     }
 
-    public Schedule(int id, Time time, Date date, Room room, Film film, double price) {
+    public Schedule(int id, Time time, Date date, double price, Room room, Film film) {
         this.id = id;
         this.time = time;
         this.date = date;
