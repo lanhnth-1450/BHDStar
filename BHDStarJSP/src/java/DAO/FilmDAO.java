@@ -45,6 +45,32 @@ public class FilmDAO {
         }
         return listFilm;
     }
+    
+    public Film getFilm(Connection con, int id) {
+        try {
+            String sql = "SELECT * FROM film WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Film result = null;
+            while (rs.next()) {
+                Film a = new Film(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                result = (Film) a;
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     public static void main(String[] args) {
         Connection conn = DBConnection.getConnection();
         ArrayList<Film> listFilm = new ArrayList<>();
