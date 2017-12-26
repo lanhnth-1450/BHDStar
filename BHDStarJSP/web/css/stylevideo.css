@@ -135,3 +135,23 @@ h5 {
 .process-volune {
     display: flex;
 }
+
+.mfp-close {
+    width: 27px;
+    height: 27px;
+    line-height: 26px;
+    position: absolute;
+    float: right;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    text-align: center;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    padding: 0 0 18px 10px;
+    color: #FFF;
+    font-style: normal;
+    font-size: 28px;
+    font-family: Arial, Baskerville, monospace;
+     background: url(../images/videocontrol/ic_close.png);
+}

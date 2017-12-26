@@ -13,8 +13,7 @@ function initialiseMediaPlayer() {
     document.getElementById('progress-bar').addEventListener('click', function(e) {
         var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
             y = e.pageY - this.offsetTop, // or e.offsetY
-            clickedValue = x * this.max / this.offsetWidth,
-            isClicked = clickedValue <= this.value;
+            clickedValue = x * this.max / this.offsetWidth;
         // document.getElementById('progress-bar').value=clickedValue-80;
         console.log(clickedValue);
         var position = (clickedValue - 62) / 100;
@@ -25,7 +24,8 @@ function initialiseMediaPlayer() {
     volune.addEventListener('click', function(e) {
         var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
             y = e.pageY - this.offsetTop, // or e.offsetY
-            clickedValue = x * this.max / this.offsetWidth - 652;
+            clickedValue = x * this.max / this.offsetWidth-521;
+            console.log(clickedValue);
         volune.value = clickedValue;
         player.setVolume(clickedValue);
 
@@ -45,17 +45,6 @@ player = new YT.Player('video--view', {
 
 function playvideo() {
     var btn = document.getElementById('btnplay');
-//    if (done == null) {
-//        player = new YT.Player('video--view', {
-//            events: {
-//                'onReady': onPlayerReady,
-//                'onStateChange': onPlayerStateChange
-//            }
-//        });
-//        done = true;
-//        btn.title = 'pause';
-//        btn.style.backgroundImage = "url(images/videocontrol/ic_playing.png)";
-//    } else 
         if (done) {
         done = false;
         player.pauseVideo();
@@ -89,6 +78,9 @@ function previewvideo() {
     progressBar.value = 0;
     player.seekTo(0);
 
+}
+function none_click(){
+    var tag=document.getElementById('id--tag');
 }
 
 function fullscreen() {

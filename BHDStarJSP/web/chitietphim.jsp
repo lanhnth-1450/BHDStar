@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-          <%
+        <%
             Connection con = DBConnection.getConnection();
             SeatDAO seatDAO = new SeatDAO();
 
@@ -38,10 +38,19 @@
         <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
         <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        
     </head>
     <body>
-      
+<!--        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script>
+            $(window).click(function () {
+                //Hide the menus if visible
+                alert("Hide the menus if visible")
+            });
+
+            // $('#iframe--view').click(function(event){
+            //     event.stopPropagation();
+            // });
+        </script>-->
 
         <jsp:include page="view_component/header.jsp"></jsp:include>
             <div id="wrapper">
@@ -119,7 +128,6 @@
                             </div>
                             <div class="mfp-content" onclick="clicktrailer()">
                                 <div class="mfp-iframe-scaler"  style="display: none;" id="frame-trailer">
-                                    <button title="Close (Esc)" type="button"  class="mfp-close">×</button>
                                     <iframe class="mfp-iframe" 
                                             src="filmtrailer.jsp?link_trailer=<%= film.getTrailer()%>" allowfullscreen="" frameborder="0"></iframe>
                                 </div>
@@ -182,7 +190,7 @@
                                                                     </div>
                                                                     <!-- end poster -->
                                                                 </div>
-                                                                        
+
                                                                 <div class="lc-main-showtimes-film-right">
                                                                     <%
                                                                         if (i <= 2) {
@@ -204,7 +212,7 @@
                                                                         <ul class="time_list">
                                                                             <%
                                                                                 for (Schedule schedule : listSchedule) {
-                                                                                listSeat = seatDAO.getNumberSeated(con, schedule.getId());
+                                                                                    listSeat = seatDAO.getNumberSeated(con, schedule.getId());
                                                                             %>
                                                                             <li>
                                                                                 <a href="BookTicketServlet?film_id=<%=film.getId()%>&schedule_id=<%=schedule.getId()%>">
@@ -213,7 +221,8 @@
                                                                                     <span>Số ghế trống: <%= listSeat.size()%></span>
                                                                                 </a>
                                                                             </li>
-                                                                            <% listSeat = new ArrayList<Seat>(); }
+                                                                            <% listSeat = new ArrayList<Seat>();
+                                                                                }
                                                                             %>
 
                                                                         </ul>
