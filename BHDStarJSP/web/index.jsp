@@ -4,11 +4,11 @@
     Author     : Lanh
 --%>
 
+<%@page import="dao.FilmDAO"%>
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="model.Film"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="DAO.FilmDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>

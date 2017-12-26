@@ -6,7 +6,7 @@
 
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="DAO.SeatDAO"%>
+<%@page import="dao.SeatDAO"%>
 <%@page import="model.Seat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="model.Schedule"%>
@@ -17,22 +17,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Chi tiết phim</title>
-        <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
-        <link rel="stylesheet" href="css/style_LANH.css" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
-        <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        
-    </head>
-    <body>
-        <%
+          <%
             Connection con = DBConnection.getConnection();
             SeatDAO seatDAO = new SeatDAO();
 
             Film film = (Film) request.getAttribute("film");
-            film.setTrailer(film.getTrailer() + "?enablejsapi=1&controls=0");
+            film.setTrailer(film.getTrailer());
 
             ArrayList<Date> listDate = (ArrayList<Date>) request.getAttribute("listDate");
             ArrayList<Schedule> listSchedule_1 = (ArrayList<Schedule>) request.getAttribute("listSchedule_1");
@@ -41,6 +31,17 @@
             ArrayList<Schedule> listSchedule = (ArrayList<Schedule>) request.getAttribute("listSchedule_1");
             ArrayList<Seat> listSeat = new ArrayList<Seat>();
         %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title><%=film.getName()%></title>
+        <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
+        <link rel="stylesheet" href="css/style_LANH.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
+        <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+    </head>
+    <body>
+      
 
         <jsp:include page="view_component/header.jsp"></jsp:include>
             <div id="wrapper">
@@ -120,7 +121,7 @@
                                 <div class="mfp-iframe-scaler"  style="display: none;" id="frame-trailer">
                                     <button title="Close (Esc)" type="button"  class="mfp-close">×</button>
                                     <iframe class="mfp-iframe" 
-                                            src="filmtrailer.jsp" allowfullscreen="" frameborder="0"></iframe>
+                                            src="filmtrailer.jsp?link_trailer=<%= film.getTrailer()%>" allowfullscreen="" frameborder="0"></iframe>
                                 </div>
                             </div>
                         </div>

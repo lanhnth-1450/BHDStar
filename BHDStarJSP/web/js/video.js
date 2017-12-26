@@ -4,6 +4,7 @@ var player;
 var done;
 
 function initialiseMediaPlayer() {
+    
     mediaPlayer = document.getElementById('video--view');
     if (mediaPlayer.style.display == 'none') {
         mediaPlayer.pause();
@@ -16,7 +17,7 @@ function initialiseMediaPlayer() {
             isClicked = clickedValue <= this.value;
         // document.getElementById('progress-bar').value=clickedValue-80;
         console.log(clickedValue);
-        var position = (clickedValue - 80) / 100;
+        var position = (clickedValue - 62) / 100;
         var time=position * player.getDuration();
         player.seekTo(time);
     });
@@ -24,7 +25,7 @@ function initialiseMediaPlayer() {
     volune.addEventListener('click', function(e) {
         var x = e.pageX - this.offsetLeft, // or e.offsetX (less support, though)
             y = e.pageY - this.offsetTop, // or e.offsetY
-            clickedValue = x * this.max / this.offsetWidth - 670;
+            clickedValue = x * this.max / this.offsetWidth - 652;
         volune.value = clickedValue;
         player.setVolume(clickedValue);
 

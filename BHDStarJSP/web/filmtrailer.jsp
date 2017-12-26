@@ -10,21 +10,23 @@
 <html>
    
 <head>
-    <title>Video</title>
+     <% 
+      String linktrailer= request.getParameter("link_trailer");
+     System.out.println(linktrailer);
+     %>
+     <title><%=linktrailer%></title>
     <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
 </head>
 
 <body>
      <% 
-      Film f=new Film();
-                    f.setTrailer("https://www.youtube.com/embed/Ga6RYejo6Hk"+"?enablejsapi=1&controls=0");
-//         Film f = (Film) session.getAttribute("film");
-     
+//      String linktrailer= request.getParameter("link_trailer");
+//     System.out.println(linktrailer);
      %>
     <script type="text/javascript" src="js/video.js"></script>
     <div class="container">
         <div class="player">
-            <iframe id="video--view" width="640" height="360" src="<%= f.getTrailer()%>" frameborder="0" style="border: solid 4px #37474F"></iframe>
+            <iframe id="video--view" width="640" height="360" src="<%= linktrailer+ "?enablejsapi=1&controls=0"%>" frameborder="0" style="border: solid 4px #37474F"></iframe>
         </div>
         <div class="controls">
             <div class="process">
