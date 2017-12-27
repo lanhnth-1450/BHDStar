@@ -21,7 +21,7 @@
 
                 <div class="warper-content">
                     <div class="page--member cinema--background">
-                        <div class="container" style="margin-top: -70px;">
+                        <div class="container" style="margin-top: -20px;">
                             <div class="product--title">
                                 <h3 style="color: #ffffff">Đăng ký thành viên</h3>
                             </div>

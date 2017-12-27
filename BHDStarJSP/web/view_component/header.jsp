@@ -62,8 +62,11 @@
                                 <a class="top--link" href="#" target="_blank">
                                         <img src="images/bhdstar-member.png">
                                 </a> -->
-                                <div class="dang-ki">
-                                    Đăng ký
+                                <div class="dang-ki" >
+                                    <a href="dangnhap.jsp">
+                                        Đăng ký                                        
+                                    </a>
+
                                 </div>
                                 <div class="top-search-form">
                                     <form action="">
@@ -99,24 +102,24 @@
                 </div>
             </div>
         </div>
-        
+
         <script>
-            function showResult(str) 
+            function showResult(str)
             {
-                if (str.length == 0) {
-                    document.getElementById("resultSearchFilm").innerHTML="";
-                    return;
-                } else {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.onreadystatechange()=function() {
-                        if (xmlHttp.readyState == 4 && xmlHttp.status = 200) {
-                            document.getElementById("resultSearchFilm").innerHTML=xmlHttp.responseText;
-                        }
-                    }
-                    xmlHttp.open("GET", "SearchFilmServlet?q="+str, true);
-                    xmlHttp.send();
-                }
-                
+            if (str.length == 0) {
+            document.getElementById("resultSearchFilm").innerHTML = "";
+            return;
+            } else {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange() = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status = 200) {
+            document.getElementById("resultSearchFilm").innerHTML = xmlHttp.responseText;
+            }
+            }
+            xmlHttp.open("GET", "SearchFilmServlet?q=" + str, true);
+            xmlHttp.send();
+            }
+
             }
         </script>
     </body>
