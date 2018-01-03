@@ -157,7 +157,7 @@
                                                         %>
                                                         <li role="presentation" class="<%=active%>">
                                                             <a href="#<%=thu + ngay%>" aria-controls="<%=thu + ngay%>" role="tab" data-toggle="tab">
-                                                                <span><%= thang%></span>
+                                                                <span><%= thang+1%></span>
                                                                 <em><%= thu%></em>
                                                                 <strong><%= ngay%></strong>
                                                             </a>

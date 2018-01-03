@@ -21,7 +21,7 @@ import model.Film;
  */
 public class FilmDAO {
     
-    public ArrayList<Film> getListFilm(Connection con) {
+    public static ArrayList<Film> getListFilm(Connection con) {
         ArrayList<Film> listFilm = new ArrayList<Film>();
         try {
             String sql = "SELECT * FROM film order by film.name";
@@ -71,12 +71,12 @@ public class FilmDAO {
             return null;
         }
     }
-    public static void main(String[] args) {
-        Connection conn = DBConnection.getConnection();
-        ArrayList<Film> listFilm = new ArrayList<>();
-        FilmDAO filmDAO = new FilmDAO();
-        listFilm = filmDAO.getListFilm(conn);
-        
-        System.out.println(listFilm.size());
-    }
+//    public static void main(String[] args) {
+//        Connection conn = DBConnection.getConnection();
+//        ArrayList<Film> listFilm = new ArrayList<>();
+//        FilmDAO filmDAO = new FilmDAO();
+//        listFilm = filmDAO.getListFilm(conn);
+//        
+//        System.out.println(listFilm.size());
+//    }
 }
