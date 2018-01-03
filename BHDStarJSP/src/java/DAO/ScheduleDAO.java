@@ -28,7 +28,36 @@ import model.Seat;
  * @author Lanh
  */
 public class ScheduleDAO {
-    public static ArrayList<Schedule> getListScheduleByFilm(Connection con, Film film, Date date) {
+    public Schedule getSchedule(Connection con, int id) {
+        try {
+            String sql = "SELECT * FROM schedule WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Schedule result = null;
+            
+            FilmDAO filmDAO = new FilmDAO();
+            RoomDAO roomDAO = new RoomDAO();
+            
+            while (rs.next()) {
+                Film film = filmDAO.getFilm(con, rs.getInt(5));
+                Room room = roomDAO.getRoom(con, rs.getInt(6));
+                Schedule a = new Schedule(rs.getInt(1),
+                        rs.getTime(2),
+                        rs.getDate(3),
+                        rs.getDouble(4),
+                        room,
+                        film);
+                result = (Schedule) a;
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(ScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public ArrayList<Schedule> getListScheduleByFilm(Connection con, Film film, Date date) {
         ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
         try {
             String sql = "SELECT *,room.id as room_id, room.name as room_name "
@@ -53,16 +82,16 @@ public class ScheduleDAO {
         return listSchedule;
     }
     
-    public static void main(String[] args) {
-        Connection conn = DBConnection.getConnection();
-        ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
-        Film film = new Film();
-        FilmDAO filmDAO = new FilmDAO();
-        film = filmDAO.getFilm(conn, 1);
-        Date date = Date.valueOf("2018-01-04");
-        System.out.println(date);
-        listSchedule = getListScheduleByFilm(conn,film, date);
-        
-        System.out.println(listSchedule.size());
-    }
+//    public static void main(String[] args) {
+//        Connection conn = DBConnection.getConnection();
+//        ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
+//        Film film = new Film();
+//        FilmDAO filmDAO = new FilmDAO();
+//        film = filmDAO.getFilm(conn, 1);
+//        Date date = Date.valueOf("2018-01-04");
+//        System.out.println(date);
+//        listSchedule = getListScheduleByFilm(conn,film, date);
+//        
+//        System.out.println(listSchedule.size());
+//    }
 }

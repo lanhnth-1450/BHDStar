@@ -4,6 +4,10 @@
     Author     : Lanh
 --%>
 
+<%@page import="control.DBConnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="dao2.SeatDAO"%>
+<%@page import="model.Schedule"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Seat"%>
 <%@page import="model.Film"%>
@@ -25,9 +29,16 @@
     </head>
     <body>
         <jsp:include page="view_component/header.jsp"></jsp:include>
-        <%
+        <%  
             Film film = (Film) request.getAttribute("film");
+            Schedule schedule = (Schedule) request.getAttribute("schedule");
+
             ArrayList<Seat> listSeat = (ArrayList<Seat>) request.getAttribute("listSeat");
+            ArrayList<Seat> allSeat = (ArrayList<Seat>) request.getAttribute("allSeat");
+
+            int numSeatFree = 114 - listSeat.size();
+            
+            SeatDAO seatDAO = new SeatDAO();
         %>     
         <div class="main-container">
             <div class="lc-main">
@@ -39,51 +50,25 @@
                             <div class="lc-main-book-ticket" style="margin-top: 90px;">
                                 <!-- header -->
                                 <div class="lc-main-book-ticket-header">
-                                    <h3>Người / Ghế</h3>
+                                    <h3>Bạn đang chọn phim: <%=film.getName()%></h3>
                                 </div>
                                 <!-- end header -->
                                 <!-- site  -->
                                 <div class="lc-main-book-ticket-site">
                                     <div class="book-ticket-item">
                                         <div class="lc-main-book-ticket-site-left">
-                                            <p>BHD Star PhamNgocThach | 2A09 | Số ghế: <span>(/120)</span></p>
-                                            <p class="book-time">27/11/2017 | 16:15 PM - 18:50 PM</p>
+                                            <p>BHD Star PhamNgocThach | 2A09 </p>
+                                            <p class="book-time">Ngay: 27/11/2018 </p>
                                         </div>
                                         <div class="lc-main-book-ticket-site-right">
-                                            <!-- site book combo  -->
                                             <div class="book-ticket-combo">
-                                                <div class="book-ticket-combo-left">
-                                                    BHD COMBO(ONLINE)
-                                                </div>
                                                 <div class="book-ticket-combo-right">
-                                                    <span class="icon-book"></span>
-                                                    <ul>
-                                                        <li class="active-combo-book"><span>0</span></li>
-                                                        <li><span>1</span></li>
-                                                        <li><span>2</span></li>
-                                                        <li><span>3</span></li>
-                                                        <li><span>4</span></li>
-                                                    </ul>
+                                                    <h5 class="book-time">16:15 PM - 18:50 PM</h5>
+                                                    <h5 class="book-time"> Số ghế: <span><%=numSeatFree%>/114</span></h5>
                                                 </div>
                                             </div>
                                             <div class="clear-both"></div>
                                             <div class="space"></div>
-                                            <div class="book-ticket-combo">
-                                                <div class="book-ticket-combo-left">
-                                                    MY COMBO(ONLINE)
-                                                </div>
-                                                <div class="book-ticket-combo-right">
-                                                    <span class="icon-book"></span>
-                                                    <ul>
-                                                        <li class="active-combo-book-online"><span>0</span></li>
-                                                        <li><span>1</span></li>
-                                                        <li><span>2</span></li>
-                                                        <li><span>3</span></li>
-                                                        <li><span>4</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!-- end site combo book -->
                                         </div>
                                     </div>
                                 </div>
@@ -96,22 +81,51 @@
                                             <span class="screen"></span>
                                         </div>
                                         <div class="seatmap-row">
+                                            <% int dem = 0;
+                                                String nameClass = "";
+                                                Connection con = DBConnection.getConnection();
+                                                for (int i = 1; i <= 10; i++) {
+                                            %>
+                                            
                                             <div class="seat-row">
-                                                <div class="box-seat standard">A10</div>
-                                                <div class="box-seat standard">A9</div>
-                                                <div class="box-seat standard">A8</div>
-                                                <div class="box-seat standard">A7</div>
-                                                <div class="box-seat standard">A6</div>
-                                                <div class="box-seat standard">A5</div>
-                                                <div class="box-seat standard">A4</div>
-                                                <div class="box-seat standard">A3</div>
-                                                <div class="box-seat standard">A2</div>
-                                                <div class="box-seat standard">A1</div>
+                                                
+                                                <%  String status = "";
+                                                    int isJ = 12;
+                                                    if (i == 1 || i == 4 || i == 5) {
+                                                        isJ = 10;
+                                                    }
+                                                    for (int j = 1; j <= isJ; j++) {
+                                                        dem = dem + 1;
+                                                        if (i <= 4) {
+                                                            nameClass = "standard";
+                                                        }
+                                                        else {
+                                                            if (5 <= i && i <= 8) {
+                                                            nameClass = "vip";
+                                                        }
+                                                        else nameClass = "couple";
+                                                        }
+                                                        for (Seat seat : listSeat) {
+                                                            if (dem == seat.getId()){
+                                                                status = "disabled";
+                                                                System.out.println(seat.getId());
+                                                            }
+                                                        }
+                                                %>
+                                                
+                                                <div class="box-seat <%=nameClass%> <%=status%>"> <%= seatDAO.getSeat(con, dem).getId()%></div>
+                                                
+                                                <% status = "";
+                                                    }
+                                                %>
                                             </div>
+                                            <%
+                                                }
+                                            %>
                                             <div class="seat-row">
-                                                <div class="box-seat standard">B12</div>
-                                                <div class="box-seat standard">B11</div>
-                                                <div class="box-seat standard">B10</div>
+                                                <div class="box-seat standard disabled">B12</div>
+                                                <div class="box-seat vip">B11</div>
+                                                <div class="box-seat couple selected">B10</div>
                                                 <div class="box-seat standard">B9</div>
                                                 <div class="box-seat standard">B8</div>
                                                 <div class="box-seat standard selected">B7</div>
@@ -121,114 +135,6 @@
                                                 <div class="box-seat standard">B3</div>
                                                 <div class="box-seat standard">B2</div>
                                                 <div class="box-seat standard">B1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat standard">C12</div>
-                                                <div class="box-seat standard">C11</div>
-                                                <div class="box-seat standard">C10</div>
-                                                <div class="box-seat standard disabled">C9</div>
-                                                <div class="box-seat standard disabled">C8</div>
-                                                <div class="box-seat standard disabled">C7</div>
-                                                <div class="box-seat standard disabled">C6</div>
-                                                <div class="box-seat standard">C5</div>
-                                                <div class="box-seat standard">C4</div>
-                                                <div class="box-seat standard">C3</div>
-                                                <div class="box-seat standard">C2</div>
-                                                <div class="box-seat standard">C1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat standard">D10</div>
-                                                <div class="box-seat standard">D9</div>
-                                                <div class="box-seat standard">D8</div>
-                                                <div class="box-seat standard">D7</div>
-                                                <div class="box-seat standard">D6</div>
-                                                <div class="box-seat standard">D5</div>
-                                                <div class="box-seat standard">D4</div>
-                                                <div class="box-seat standard">D3</div>
-                                                <div class="box-seat standard">D2</div>
-                                                <div class="box-seat standard">D1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat vip">E10</div>
-                                                <div class="box-seat vip">E9</div>
-                                                <div class="box-seat vip">E8</div>
-                                                <div class="box-seat vip">E7</div>
-                                                <div class="box-seat vip">E6</div>
-                                                <div class="box-seat vip">E5</div>
-                                                <div class="box-seat vip">E4</div>
-                                                <div class="box-seat vip">E3</div>
-                                                <div class="box-seat vip">E2</div>
-                                                <div class="box-seat vip">E1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat vip">F12</div>
-                                                <div class="box-seat vip">F11</div>
-                                                <div class="box-seat vip">F10</div>
-                                                <div class="box-seat vip">F9</div>
-                                                <div class="box-seat vip">F8</div>
-                                                <div class="box-seat vip">F7</div>
-                                                <div class="box-seat vip">F6</div>
-                                                <div class="box-seat vip">F5</div>
-                                                <div class="box-seat vip">F4</div>
-                                                <div class="box-seat vip">F3</div>
-                                                <div class="box-seat vip">F2</div>
-                                                <div class="box-seat vip">F1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat vip">G12</div>
-                                                <div class="box-seat vip">G11</div>
-                                                <div class="box-seat vip">G10</div>
-                                                <div class="box-seat vip">G9</div>
-                                                <div class="box-seat vip">G8</div>
-                                                <div class="box-seat vip">G7</div>
-                                                <div class="box-seat vip">G6</div>
-                                                <div class="box-seat vip">G5</div>
-                                                <div class="box-seat vip">G4</div>
-                                                <div class="box-seat vip">G3</div>
-                                                <div class="box-seat vip">G2</div>
-                                                <div class="box-seat vip">G1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat vip">H12</div>
-                                                <div class="box-seat vip">H11</div>
-                                                <div class="box-seat vip">H10</div>
-                                                <div class="box-seat vip">H9</div>
-                                                <div class="box-seat vip">H8</div>
-                                                <div class="box-seat vip">H7</div>
-                                                <div class="box-seat vip">H6</div>
-                                                <div class="box-seat vip">H5</div>
-                                                <div class="box-seat vip">H4</div>
-                                                <div class="box-seat vip">H3</div>
-                                                <div class="box-seat vip">H2</div>
-                                                <div class="box-seat vip">H1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat couple">L12</div>
-                                                <div class="box-seat couple">L11</div>
-                                                <div class="box-seat couple">L10</div>
-                                                <div class="box-seat couple">L9</div>
-                                                <div class="box-seat couple">L8</div>
-                                                <div class="box-seat couple">L7</div>
-                                                <div class="box-seat couple">L6</div>
-                                                <div class="box-seat couple">L5</div>
-                                                <div class="box-seat couple selected">L4</div>
-                                                <div class="box-seat couple selected">L3</div>
-                                                <div class="box-seat couple">L2</div>
-                                                <div class="box-seat couple">L1</div>
-                                            </div>
-                                            <div class="seat-row">
-                                                <div class="box-seat couple">K12</div>
-                                                <div class="box-seat couple">K11</div>
-                                                <div class="box-seat couple selected">K10</div>
-                                                <div class="box-seat couple selected">K9</div>
-                                                <div class="box-seat couple">K8</div>
-                                                <div class="box-seat couple">K7</div>
-                                                <div class="box-seat couple">K6</div>
-                                                <div class="box-seat couple">K5</div>
-                                                <div class="box-seat couple">K4</div>
-                                                <div class="box-seat couple">K3</div>
-                                                <div class="box-seat couple">K2</div>
-                                                <div class="box-seat couple">K1</div>
                                             </div>
                                         </div>
                                     </div>
@@ -299,8 +205,8 @@
                                                 </div>
                                                 <div class="bottom-content-session">
                                                     <p>
-                                                        <span>Phòng chiếu:</span>
-                                                        <strong>Cinema 1</strong>
+                                                        <span>Phòng chiếu: </span>
+                                                        <strong><%=schedule.getRoom().getName()%></strong>
                                                     </p>
                                                 </div>
                                                 <div class="bottom-content-session">
