@@ -6,7 +6,7 @@
 
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="dao.SeatDAO"%>
+<%@page import="dao2.SeatDAO"%>
 <%@page import="model.Seat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="model.Schedule"%>
@@ -213,12 +213,13 @@
                                                                             <%
                                                                                 for (Schedule schedule : listSchedule) {
                                                                                     listSeat = seatDAO.getNumberSeated(con, schedule.getId());
+                                                                                    int numFee = 114 - listSeat.size();
                                                                             %>
                                                                             <li>
                                                                                 <a href="BookTicketServlet?film_id=<%=film.getId()%>&schedule_id=<%=schedule.getId()%>">
                                                                                     <span><%=schedule.getTime()%></span>
                                                                                     <br>
-                                                                                    <span>Số ghế trống: <%= listSeat.size()%></span>
+                                                                                    <span>Còn <%=numFee%> ghế</span>
                                                                                 </a>
                                                                             </li>
                                                                             <% listSeat = new ArrayList<Seat>();

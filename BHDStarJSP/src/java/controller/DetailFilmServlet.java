@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dao.FilmDAO;
-import dao.ScheduleDAO;
+import dao2.FilmDAO;
+import dao2.ScheduleDAO;
 import control.DBConnection;
 import java.io.IOException;
 import java.io.PrintWriter;

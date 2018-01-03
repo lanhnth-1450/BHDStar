@@ -4,7 +4,7 @@
     Author     : Lanh
 --%>
 
-<%@page import="dao.FilmDAO"%>
+<%@page import="dao2.FilmDAO"%>
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="model.Film"%>

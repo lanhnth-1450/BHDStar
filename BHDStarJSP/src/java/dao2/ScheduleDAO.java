@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao2;
 
 import control.DBConnection;
 import java.sql.Connection;
@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,12 +22,13 @@ import model.Room;
 import model.Schedule;
 import model.Seat;
 
+
 /**
  *
  * @author Lanh
  */
 public class ScheduleDAO {
-    public ArrayList<Schedule> getListScheduleByFilm(Connection con, Film film, Date date) {
+    public static ArrayList<Schedule> getListScheduleByFilm(Connection con, Film film, Date date) {
         ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
         try {
             String sql = "SELECT *,room.id as room_id, room.name as room_name "
@@ -35,7 +37,7 @@ public class ScheduleDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, film.getId());
             SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
-            ps.setString(2, formatterDate.format(date));
+            ps.setString(2, date.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Time time = rs.getTime("time");
@@ -55,8 +57,11 @@ public class ScheduleDAO {
         Connection conn = DBConnection.getConnection();
         ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
         Film film = new Film();
-//        Date date = new Date();
-//        listSchedule = getListScheduleByFilm(conn,film, date);
+        FilmDAO filmDAO = new FilmDAO();
+        film = filmDAO.getFilm(conn, 1);
+        Date date = Date.valueOf("2018-01-04");
+        System.out.println(date);
+        listSchedule = getListScheduleByFilm(conn,film, date);
         
         System.out.println(listSchedule.size());
     }
