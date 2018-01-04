@@ -71,6 +71,32 @@ public class FilmDAO {
             return null;
         }
     }
+    
+    public ArrayList<Film> getFilmByName(Connection con, String name) {
+        ArrayList<Film> result = new ArrayList<Film>();
+        try {
+            String sql = "SELECT * FROM film where name like ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+name+"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Film a = new Film(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4),
+                        rs.getInt(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                result.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
 //    public static void main(String[] args) {
 //        Connection conn = DBConnection.getConnection();
 //        ArrayList<Film> listFilm = new ArrayList<>();
