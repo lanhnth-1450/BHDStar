@@ -61,6 +61,39 @@ public class ClientDAO {
         return null;
 
     }
+    public Client getUser(int id_) {
+        Client c;
+        String searchQuery
+                = "select * from client where id='"
+                + id_;
+        try {
+            //connect to DB 
+            conn = (Connection) DBConnection.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(searchQuery);
+            boolean more = rs.next();
+            if (!more) {
+                System.out.println("Sorry, you are not a registered user! Please sign up first");
+                return null;
+            } //if user exists set the isValid variable to true
+            else if (more) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String pass = rs.getString("password");
+                String name = rs.getString("name");
+                String add = rs.getString("address");
+                String mail = rs.getString("mail");
+                String phone = rs.getString("phone");
+                c = new Client(id, username, pass, name, add, mail, phone);
+                return c;
+            }
+        } catch (Exception ex) {
+            System.out.println("Log In failed: An Exception has occurred! " + ex);
+            return null;
+        } //some exception handling
+        return null;
+
+    }
     public boolean singUp(Client c){
         conn=(Connection) DBConnection.getConnection();
         String query = "insert into client(username,password,name,address,mail,phone) \n"

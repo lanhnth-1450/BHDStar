@@ -67,7 +67,7 @@ public class SingUpServlet extends HttpServlet {
         Client c=new Client(username, pass, username, add, email, sdt);
         if ((new ClientDAO()).singUp(c)) {
             HttpSession session=request.getSession(true);
-            session.setAttribute("clien_singup", c);
+            session.setAttribute("clien", c);
             response.sendRedirect("index.jsp");
         }
         else{

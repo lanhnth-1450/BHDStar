@@ -4,6 +4,8 @@
     Author     : Lanh
 --%>
 
+<%@page import="model.Client"%>
+<%@page import="model.User"%>
 <%@page import="dao.FilmDAO"%>
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
@@ -24,13 +26,21 @@
         <script type="text/javascript" src="js/video.js"></script>
     </head>
     <body class="home blog">
-        <jsp:include page="view_component/header.jsp"></jsp:include>
-        <jsp:include page="view_component/slide.jsp"></jsp:include>
         <%
             Connection con = DBConnection.getConnection();
             FilmDAO filmDAO = new FilmDAO();
             ArrayList<Film> listFilm = filmDAO.getListFilm(con);
-        %>     
+            Client c = null;
+            try {
+                c = (Client) request.getAttribute("client");
+            } catch (Exception e) {
+                c = null;
+            }
+        %>
+    <jsp:include page ="view_component/header.jsp?name=<%=c.getName()%>"></jsp:include>
+
+    <jsp:include page="view_component/slide.jsp"></jsp:include>
+
         <div class="index">
             <div class="section--product-view">
                 <ul>
@@ -43,124 +53,124 @@
                         <div class="scroll-wrapper js_film">
                             <div class="flex-viewport" style="overflow: hidden;position: relative;">
                                 <ul class="slides">
-                                    <% for (int i = 0; i < listFilm.size(); i++) {%>    
-                                    <li class="type-movies" style="width: 200px; margin-right: 23px; float: left; display: block; margin-left: 120px;">
-                                        <div class="film-item">
-                                            <a class="bhd-trailer-box bhd-trailer" href="<%=listFilm.get(i).getTrailer()%>">Trailer</a>
+                                <% for (int i = 0; i < listFilm.size(); i++) {%>    
+                                <li class="type-movies" style="width: 200px; margin-right: 23px; float: left; display: block; margin-left: 120px;">
+                                    <div class="film-item">
+                                        <a class="bhd-trailer-box bhd-trailer" href="<%=listFilm.get(i).getTrailer()%>">Trailer</a>
 
-                                            <span class="meta-box-type">
-                                                <span class="film--rating">C 18</span>
-                                                <span class="tech--2d">2D</span>
-                                            </span>
-                                            <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId() %>">
-                                                <img src="<%=listFilm.get(i).getPoster()%>">
-                                            </a>
-                                            <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId() %>">
-                                                <span class="movie--name"><%=listFilm.get(i).getName()%></span>
-                                            </a>
-                                        </div>
-                                        <a href="#" class="btn--green">
-                                            <i class="fa fa-ticket"></i>
-                                            MUA VÉ
+                                        <span class="meta-box-type">
+                                            <span class="film--rating">C 18</span>
+                                            <span class="tech--2d">2D</span>
+                                        </span>
+                                        <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId()%>">
+                                            <img src="<%=listFilm.get(i).getPoster()%>">
                                         </a>
-                                    </li>
-                                    <% }%>
-                                </ul>
-                            </div>
-                            <!-- 	<ul class="flex-direction-nav">
-                                            <li class="flex-nav-prev">
-                                                    <a class="flex-prev" href="#">Previous</a>
-                                            </li>
-                                            <li class="flex-nav-next">
-                                                    <a class="flex-next" href="#">Next</a>
-                                            </li>
-                                    </ul>
-                            </div> -->
-                    </li>
-                    <li id="film-2" class="list--film js__tab_content js__active"></li>
-                    <li id="film-3" class="list--film js__tab_content"></li>
-                </ul>
-            </div>
-
-            <div class="section--member">
-                <div class="container">
-                    <img class="img--title" src="images/bg-title-bhd-member.png">
-                    <div class="card-holder">
-                        <!-- <img src="images/img-hand.png"> -->
-                    </div>
-                    <div class="flexslider">
-                        <div class="flex-viewport">
-                            <ul class="list--card-member slides">
-                                <li>
-                                    <a href="#">
-                                        <img class="img--card-member" src="images/STAR.png">
+                                        <a href="DetailFilmServlet?film_id=<%= listFilm.get(i).getId()%>">
+                                            <span class="movie--name"><%=listFilm.get(i).getName()%></span>
+                                        </a>
+                                    </div>
+                                    <a href="#" class="btn--green">
+                                        <i class="fa fa-ticket"></i>
+                                        MUA VÉ
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img--card-member" src="images/GOLD.png">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img--card-member" src="images/DIAMOND.png">
-                                    </a>
-                                </li>
-                            </ul>	
-                        </div>
-                    </div>
-
-
-                    <a href="#" class="btn--white"> ĐĂNG KÝ NGAY</a>
-                </div>
-            </div>
-
-            <div class="section--promotion">
-                <h1 class="title">
-                    <strong class="js__active js__promotion_tab" data-target="#promotion-1">
-                        <span>Khuyến mãi</span>
-                    </strong>
-                    <span>|</span>
-                    <strong class="js__promotion_tab" data-target="#promotion-2">
-                        <span>Sự kiện</span>
-                    </strong>
-                </h1>
-                <div class="container">
-                    <div id="promotion-1" class="flexslider js__flexslider_promotion js__promotion_tab_content js__active">
-                        <div class="flex-viewport">
-                            <ul class="slides">
-                                <li data-thumb-alt>
-                                    <a href="#">
-                                        <img src="images/sale-event/BHD-Star-GoiPhim-TrangYeuThuong-710x320-02.jpg">
-                                    </a>
-                                </li>
-                                <li data-thumb-alt>
-                                    <a href="#">
-                                        <img src="images/sale-event/1463628861_710x320-1.png">
-                                    </a>
-                                </li>
+                                <% }%>
                             </ul>
                         </div>
-                    </div>
-                    <!-- <div id="promotion-2" class="flexslider js__flexslider_promotion js__promotion_tab_content js__active">
-                            <div class="flex-viewport">
-                                    <ul class="slides">
-                                            <li data-thumb-alt>
-                                                    <a href="#">
-                                                            <img src="images/sale-event/1463628861_710x320-1.png">
-                                                    </a>
-                                            </li>
-                                            <li data-thumb-alt>
-                                                    <a href="#">
-                                                            <img src="images/sale-event/BHD-Star-GoiPhim-TrangYeuThuong-710x320-02.jpg">
-                                                    </a>
-                                            </li>
-                                    </ul>
-                            </div>
-                    </div> -->
+                        <!-- 	<ul class="flex-direction-nav">
+                                        <li class="flex-nav-prev">
+                                                <a class="flex-prev" href="#">Previous</a>
+                                        </li>
+                                        <li class="flex-nav-next">
+                                                <a class="flex-next" href="#">Next</a>
+                                        </li>
+                                </ul>
+                        </div> -->
+                </li>
+                <li id="film-2" class="list--film js__tab_content js__active"></li>
+                <li id="film-3" class="list--film js__tab_content"></li>
+            </ul>
+        </div>
+
+        <div class="section--member">
+            <div class="container">
+                <img class="img--title" src="images/bg-title-bhd-member.png">
+                <div class="card-holder">
+                    <!-- <img src="images/img-hand.png"> -->
                 </div>
+                <div class="flexslider">
+                    <div class="flex-viewport">
+                        <ul class="list--card-member slides">
+                            <li>
+                                <a href="#">
+                                    <img class="img--card-member" src="images/STAR.png">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img--card-member" src="images/GOLD.png">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img class="img--card-member" src="images/DIAMOND.png">
+                                </a>
+                            </li>
+                        </ul>	
+                    </div>
+                </div>
+
+
+                <a href="#" class="btn--white"> ĐĂNG KÝ NGAY</a>
             </div>
         </div>
-        <jsp:include page="view_component/footer.jsp"></jsp:include>
-    </body>
+
+        <div class="section--promotion">
+            <h1 class="title">
+                <strong class="js__active js__promotion_tab" data-target="#promotion-1">
+                    <span>Khuyến mãi</span>
+                </strong>
+                <span>|</span>
+                <strong class="js__promotion_tab" data-target="#promotion-2">
+                    <span>Sự kiện</span>
+                </strong>
+            </h1>
+            <div class="container">
+                <div id="promotion-1" class="flexslider js__flexslider_promotion js__promotion_tab_content js__active">
+                    <div class="flex-viewport">
+                        <ul class="slides">
+                            <li data-thumb-alt>
+                                <a href="#">
+                                    <img src="images/sale-event/BHD-Star-GoiPhim-TrangYeuThuong-710x320-02.jpg">
+                                </a>
+                            </li>
+                            <li data-thumb-alt>
+                                <a href="#">
+                                    <img src="images/sale-event/1463628861_710x320-1.png">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div id="promotion-2" class="flexslider js__flexslider_promotion js__promotion_tab_content js__active">
+                        <div class="flex-viewport">
+                                <ul class="slides">
+                                        <li data-thumb-alt>
+                                                <a href="#">
+                                                        <img src="images/sale-event/1463628861_710x320-1.png">
+                                                </a>
+                                        </li>
+                                        <li data-thumb-alt>
+                                                <a href="#">
+                                                        <img src="images/sale-event/BHD-Star-GoiPhim-TrangYeuThuong-710x320-02.jpg">
+                                                </a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <jsp:include page="view_component/footer.jsp"></jsp:include>
+</body>
 </html>
