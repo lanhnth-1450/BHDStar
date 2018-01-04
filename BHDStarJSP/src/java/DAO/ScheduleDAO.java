@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,11 +22,41 @@ import model.Room;
 import model.Schedule;
 import model.Seat;
 
+
 /**
  *
  * @author Lanh
  */
 public class ScheduleDAO {
+    public Schedule getSchedule(Connection con, int id) {
+        try {
+            String sql = "SELECT * FROM schedule WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Schedule result = null;
+            
+            FilmDAO filmDAO = new FilmDAO();
+            RoomDAO roomDAO = new RoomDAO();
+            
+            while (rs.next()) {
+                Film film = filmDAO.getFilm(con, rs.getInt(5));
+                Room room = roomDAO.getRoom(con, rs.getInt(6));
+                Schedule a = new Schedule(rs.getInt(1),
+                        rs.getTime(2),
+                        rs.getDate(3),
+                        rs.getDouble(4),
+                        room,
+                        film);
+                result = (Schedule) a;
+            }
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(ScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public ArrayList<Schedule> getListScheduleByFilm(Connection con, Film film, Date date) {
         ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
         try {
@@ -35,7 +66,7 @@ public class ScheduleDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, film.getId());
             SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
-            ps.setString(2, formatterDate.format(date));
+            ps.setString(2, date.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Time time = rs.getTime("time");
@@ -51,13 +82,16 @@ public class ScheduleDAO {
         return listSchedule;
     }
     
-    public static void main(String[] args) {
-        Connection conn = DBConnection.getConnection();
-        ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
-        Film film = new Film();
-//        Date date = new Date();
+//    public static void main(String[] args) {
+//        Connection conn = DBConnection.getConnection();
+//        ArrayList<Schedule> listSchedule = new ArrayList<Schedule>();
+//        Film film = new Film();
+//        FilmDAO filmDAO = new FilmDAO();
+//        film = filmDAO.getFilm(conn, 1);
+//        Date date = Date.valueOf("2018-01-04");
+//        System.out.println(date);
 //        listSchedule = getListScheduleByFilm(conn,film, date);
-        
-        System.out.println(listSchedule.size());
-    }
+//        
+//        System.out.println(listSchedule.size());
+//    }
 }

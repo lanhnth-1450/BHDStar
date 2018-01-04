@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Client implements Serializable {
     private int id;
-    private String username, password, name, address, mail, phone;
+    private String username, password, name, address, mail, phone,ava;
 
     public Client() {
     }
@@ -23,16 +23,17 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public Client(String username, String password, String name, String address, String mail, String phone) {
+    public Client(String username, String password, String name, String address, String mail, String phone,String ava) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.address = address;
         this.mail = mail;
         this.phone = phone;
+        this.ava=ava;
     }
     
-    public Client(int id, String username, String password, String name, String address, String mail, String phone) {
+    public Client(int id, String username, String password, String name, String address, String mail, String phone,String ava) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -40,6 +41,7 @@ public class Client implements Serializable {
         this.address = address;
         this.mail = mail;
         this.phone = phone;
+        this.ava=ava;
     }
 
     public int getId() {
@@ -96,6 +98,14 @@ public class Client implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAva() {
+        return ava;
+    }
+
+    public void setAva(String ava) {
+        this.ava = ava;
     }
     
     

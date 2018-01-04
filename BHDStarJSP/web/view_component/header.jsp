@@ -23,7 +23,7 @@
                 name = null;
             }
         %>
-        <div class="wrapper">
+        <div class="wrapper" style="z-index: 99999">
             <div class="main_header fixed">
                 <div class="main_header_innor">
                     <div id="menu"></div>

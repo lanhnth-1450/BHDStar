@@ -33,8 +33,8 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=film.getName()%></title>
-        <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
         <link rel="stylesheet" href="css/style_LANH.css" type="text/css" />
+                <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
         <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
         <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -53,7 +53,7 @@
         </script>-->
 
         <jsp:include page="view_component/header.jsp"></jsp:include>
-            <div id="wrapper">
+        <div id="wrapper">
                 <div class="wraper--content">
                     <div class="film--wrapper">
                         <div class="container" style="    margin-left: 90px;">
@@ -157,7 +157,7 @@
                                                         %>
                                                         <li role="presentation" class="<%=active%>">
                                                             <a href="#<%=thu + ngay%>" aria-controls="<%=thu + ngay%>" role="tab" data-toggle="tab">
-                                                                <span><%= thang%></span>
+                                                                <span><%= thang+1%></span>
                                                                 <em><%= thu%></em>
                                                                 <strong><%= ngay%></strong>
                                                             </a>
@@ -213,12 +213,13 @@
                                                                             <%
                                                                                 for (Schedule schedule : listSchedule) {
                                                                                     listSeat = seatDAO.getNumberSeated(con, schedule.getId());
+                                                                                    int numFee = 114 - listSeat.size();
                                                                             %>
                                                                             <li>
                                                                                 <a href="BookTicketServlet?film_id=<%=film.getId()%>&schedule_id=<%=schedule.getId()%>">
                                                                                     <span><%=schedule.getTime()%></span>
                                                                                     <br>
-                                                                                    <span>Số ghế trống: <%= listSeat.size()%></span>
+                                                                                    <span>Còn <%=numFee%> ghế</span>
                                                                                 </a>
                                                                             </li>
                                                                             <% listSeat = new ArrayList<Seat>();

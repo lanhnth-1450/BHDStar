@@ -5,9 +5,12 @@
  */
 package controller;
 
+import control.DBConnection;
 import dao.FilmDAO;
 import dao.SeatDAO;
-import control.DBConnection;
+import dao.RoomDAO;
+import dao.ScheduleDAO;
+import dao.SeatDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Film;
+import model.Room;
+import model.Schedule;
 import model.Seat;
 
 /**
@@ -71,14 +76,27 @@ public class BookTicketServlet extends HttpServlet {
         
         FilmDAO filmDAO = new FilmDAO();
         Film film = filmDAO.getFilm(con, film_id);
-            
+        
+        ScheduleDAO scheduleDAO = new ScheduleDAO();
+        Schedule schedule = scheduleDAO.getSchedule(con, schedule_id);
+        
+//        RoomDAO roomDAO = new RoomDAO();
+//        Room room = roomDAO.getRoom(con, schedule.getRoom().getId());
+        
         SeatDAO seatDAO = new SeatDAO();
         ArrayList<Seat> listSeat = new ArrayList<Seat>();
         listSeat = seatDAO.getNumberSeated(con, schedule_id);
         
+        ArrayList<Seat> allSeat = new ArrayList<Seat>();
+        allSeat = seatDAO.getListSeat(con);
+        
         System.out.println(film.getId());
         request.setAttribute("film", film);
         request.setAttribute("listSeat", listSeat);
+        request.setAttribute("allSeat", allSeat);
+        request.setAttribute("schedule", schedule);
+        
+//        request.setAttribute("room", room);
            
         RequestDispatcher dispatcher = request.getRequestDispatcher("bookTicket.jsp?film_id="+film.getId());
         dispatcher.forward(request, response);

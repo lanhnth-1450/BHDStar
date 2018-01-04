@@ -64,7 +64,8 @@ public class SingUpServlet extends HttpServlet {
         String username=request.getParameter("name");
         String sdt=request.getParameter("phone");
         String add=request.getParameter("address");
-        Client c=new Client(username, pass, username, add, email, sdt);
+       
+        Client c=new Client(username, pass, username, add, email, sdt,null);
         if ((new ClientDAO()).singUp(c)) {
             HttpSession session=request.getSession(true);
             session.setAttribute("clien", c);

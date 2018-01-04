@@ -51,7 +51,8 @@ public class ClientDAO {
                 String add = rs.getString("address");
                 String mail = rs.getString("mail");
                 String phone = rs.getString("phone");
-                c = new Client(id, username, pass, name, add, mail, phone);
+                String ava=rs.getString("avatar");
+                c = new Client(id, username, pass, name, add, mail, phone,ava);
                 return c;
             }
         } catch (Exception ex) {
@@ -84,7 +85,8 @@ public class ClientDAO {
                 String add = rs.getString("address");
                 String mail = rs.getString("mail");
                 String phone = rs.getString("phone");
-                c = new Client(id, username, pass, name, add, mail, phone);
+                String ava=rs.getString("avatar");
+                c = new Client(id, username, pass, name, add, mail, phone,ava);
                 return c;
             }
         } catch (Exception ex) {
@@ -111,6 +113,12 @@ public class ClientDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+    }
+    public static void main(String[] args) {
+      Client c=  new ClientDAO().checkLogin("loanxu@gmail.com", "1234");
+        if (c!=null) {
+            System.out.println("login");
         }
     }
 }
