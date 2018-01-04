@@ -45,7 +45,7 @@ public class SeatDAO {
         return result;
 
     }
-    
+
     public Seat getSeat(Connection con, int id) {
         Seat seat = null;
         try {
@@ -53,13 +53,13 @@ public class SeatDAO {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Room room = new Room(rs.getInt("room_id"), "");
                 Seat seat1 = new Seat(
                         rs.getInt("id"),
-                        rs.getInt("row"), 
-                        rs.getInt("col"), 
-                        rs.getString("type"), 
+                        rs.getInt("row"),
+                        rs.getInt("col"),
+                        rs.getString("type"),
                         room);
                 seat = (Seat) seat1;
             }
@@ -69,7 +69,7 @@ public class SeatDAO {
             return null;
         }
     }
-    
+
     public static ArrayList<Seat> getNumberSeated(Connection con, int schedule_id) {
         ArrayList<Seat> listSeat = new ArrayList<Seat>();
         try {

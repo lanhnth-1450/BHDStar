@@ -230,6 +230,7 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <jsp:include page="view_component/footer.jsp"></jsp:include>
         <script>
             function showResult(str)

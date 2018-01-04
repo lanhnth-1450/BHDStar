@@ -84,31 +84,13 @@
 
                                 </div>
                                 <div class="top-search-form">
-                                    <form action="">
-                                        <input type="text" id="search" placeholder="Search.." onkeyup="showResult(this.value)">
-                                        <!-- <ul id="myUL" class="showResult">
-                                         <li><a href="#">Adele</a></li>
-                                         <li><a href="#">Agnes</a></li>
-
-                                         <li><a href="#">Billy</a></li>
-                                         <li><a href="#">Bob</a></li>
-
-                                         <li><a href="#">Calvin</a></li>
-                                         <li><a href="#">Christina</a></li>
-                                         <li><a href="#">Cindy</a></li>
-                                       </ul> -->
+                                    <form  name="vinform">
+                                        <input type="text" id="search" name="name" placeholder="Search .." onkeyup="searchInfo()">
+                                        <ul id="myUL" class="showResult" style="display: block;">
+                                            <li><a href="#">Adele</a></li>
+                                        </ul> 
                                     </form>
-                                    <p><span id="resultSearchFilm"> </span></p>
-                                    <div class="result" style="display: none" id="resultSearchFilm">
-                                        <ul>
-                                            <li>
-                                                <a href="#">Siêu bão địa cầu Siêu bão địa cầu</a>
-                                                <a href="#">Siêu bão địa cầu</a>
-                                                <a href="#">Siêu bão địa cầu</a>
-                                                <a href="#">Siêu bão địa cầu</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <p><span id="mylocation"> </span></p>
                                 </div>
                                 <img src="images/line-header1.png" alt="bgmenu" class="line-header">
                             </div>
@@ -117,25 +99,35 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript">
 
-        <script>
-            function showResult(str)
-            {
-            if (str.length == 0) {
-            document.getElementById("resultSearchFilm").innerHTML = "";
-            return;
-            } else {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange() = function() {
-            if (xmlHttp.readyState == 4 && xmlHttp.status = 200) {
-            document.getElementById("resultSearchFilm").innerHTML = xmlHttp.responseText;
-            }
-            }
-            xmlHttp.open("GET", "SearchFilmServlet?q=" + str, true);
-            xmlHttp.send();
-            }
+            $(document).ready(function () {
 
-            }
+                $('#search').blur(function () {
+
+                    var name = $('#yourname').val();
+
+                    $.ajax({
+
+                        type: "GET",
+
+                        url: "GetFilmServlet",
+
+                        data: {name: name},
+
+                        success: function (result) {
+
+                            $('#myUL').htnl(result);
+
+                        }
+
+                    });
+
+                });
+
+            });
+
         </script>
     </body>
 </html>

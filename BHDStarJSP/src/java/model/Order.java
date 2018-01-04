@@ -24,13 +24,15 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, Date date, int status, Client client, ArrayList<Ticket> listTicket) {
+    public Order(int id, Date date, int status, Client client, float grandtotal) {
         this.id = id;
         this.date = date;
         this.status = status;
         this.client = client;
-        this.listTicket = listTicket;
+        this.grandtotal = grandtotal;
     }
+
+    
 
     public Order(int id, Date date, int status, Client client, ArrayList<Ticket> listTicket, float discount, float grandtotal) {
         this.id = id;

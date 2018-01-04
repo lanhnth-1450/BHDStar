@@ -30,7 +30,7 @@
     </head>
     <body>
         <jsp:include page="view_component/header.jsp"></jsp:include>
-        <%  
+        <%
             Film film = (Film) request.getAttribute("film");
             Schedule schedule = (Schedule) request.getAttribute("schedule");
 
@@ -38,10 +38,10 @@
             ArrayList<Seat> allSeat = (ArrayList<Seat>) request.getAttribute("allSeat");
 
             int numSeatFree = 114 - listSeat.size();
-            
+
             SeatDAO seatDAO = new SeatDAO();
         %>     
-        <div class="main-container">
+        <div class="main-container" style="margin-bottom: 20px;">
             <div class="lc-main">
                 <div class="row">
                     <div class="lc-col-main">
@@ -87,9 +87,9 @@
                                                 Connection con = DBConnection.getConnection();
                                                 for (int i = 1; i <= 10; i++) {
                                             %>
-                                            
+
                                             <div class="seat-row">
-                                                
+
                                                 <%  String status = "";
                                                     int isJ = 12;
                                                     if (i == 1 || i == 4 || i == 5) {
@@ -99,23 +99,23 @@
                                                         dem = dem + 1;
                                                         if (i <= 4) {
                                                             nameClass = "standard";
-                                                        }
-                                                        else {
+                                                        } else {
                                                             if (5 <= i && i <= 8) {
-                                                            nameClass = "vip";
-                                                        }
-                                                        else nameClass = "couple";
+                                                                nameClass = "vip";
+                                                            } else {
+                                                                nameClass = "couple";
+                                                            }
                                                         }
                                                         for (Seat seat : listSeat) {
-                                                            if (dem == seat.getId()){
+                                                            if (dem == seat.getId()) {
                                                                 status = "disabled";
                                                                 System.out.println(seat.getId());
                                                             }
                                                         }
                                                 %>
-                                                
+
                                                 <div class="box-seat <%=nameClass%> <%=status%>"> <%= seatDAO.getSeat(con, dem).getId()%></div>
-                                                
+
                                                 <% status = "";
                                                     }
                                                 %>
@@ -123,20 +123,7 @@
                                             <%
                                                 }
                                             %>
-                                            <div class="seat-row">
-                                                <div class="box-seat standard disabled">B12</div>
-                                                <div class="box-seat vip">B11</div>
-                                                <div class="box-seat couple selected">B10</div>
-                                                <div class="box-seat standard">B9</div>
-                                                <div class="box-seat standard">B8</div>
-                                                <div class="box-seat standard selected">B7</div>
-                                                <div class="box-seat standard selected">B6</div>
-                                                <div class="box-seat standard selected">B5</div>
-                                                <div class="box-seat standard selected">B4</div>
-                                                <div class="box-seat standard">B3</div>
-                                                <div class="box-seat standard">B2</div>
-                                                <div class="box-seat standard">B1</div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <!-- end left seatmap  -->
@@ -184,7 +171,7 @@
                                         <div class="lc-main-book-ticket-bottom-main">
                                             <div class="lc-main-book-ticket-bottom-col col-film-first">
                                                 <div class="bottom-img">
-                                                    <img src="images/films/BHD-Star-Kingsman-poster-470x700-245x365.jpg" alt="">
+                                                    <img src="<%=film.getPoster()%>" alt="">
                                                 </div>
                                                 <div class="bottom-content-film">
                                                     <p><%=film.getName()%></p>
@@ -201,7 +188,7 @@
                                                 <div class="bottom-content-session">
                                                     <p>
                                                         <span>Ngày:</span>
-                                                        <strong>24/11/2017</strong>
+                                                        <strong><%=schedule.getDate()%></strong>
                                                     </p>
                                                 </div>
                                                 <div class="bottom-content-session">
@@ -214,27 +201,27 @@
                                                     <p>
                                                         <span>Ghế:</span>
                                                     </p>
-                                                    <p><strong>prime B4, B5, B6, B7, L3, L4, K10, K9</strong></p>
+                                                    <p class="prime_seat">prime B4, B5, B6, B7, L3, L4, K10, K9</p>
                                                 </div>
                                             </div>
                                             <div class="lc-main-book-ticket-bottom-col col-film-third">
                                                 <div class="bottom-content-price">
                                                     <p>
-                                                        <span>Phim:</span>
-                                                        <strong>496.000,00 ₫</strong>
+                                                        <span>Giá vé: </span>
+                                                        <strong class="price"><%=schedule.getPrice()%> ₫</strong>
                                                     </p>
                                                 </div>
                                                 <div class="bottom-content-price">
                                                     <p>
-                                                        <span class="total">Tổng:</span>
-                                                        <strong>496.000,00 ₫</strong>
+                                                        <span>Tổng:</span>
+                                                        <strong class="subtotal">0 ₫</strong>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="lc-main-book-ticket-bottom-next">
-                                            <a href="#" title="Thanh toan" style="color: red;">Thanh toán</a>
+                                            <button type="button" id="save" style="cursor: pointer;" >Thanh toán</button>
                                         </div>
                                     </div>
 
@@ -247,7 +234,81 @@
             </div>
         </div>
         <jsp:include page="view_component/footer.jsp"></jsp:include>
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery-3.2.1.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script >
+                $(document).ready(function () {
+                    var getAllData = [];
+                    var mode = "defaul";
+                    var list_seat = {};
+                    var prime = {};
+                    var allData = {};
+                    var row = 0;
+
+                    function setClassText(clasName, text) {
+                        $("." + clasName + "").text(text);
+                    }
+
+                    function setPrimeSeat() {
+                        var prime = "";
+                        var t = $('.selected');
+                        $.each(t, function (key, value) {
+                            if (key != 0)
+                                prime += ",";
+                            prime += $(value).text();
+
+                        });
+                        return prime;
+                    }
+
+                    function setSubtotal() {
+                        var total = 0;
+                        var t = $('.selected');
+                        $.each(t, function (key, value) {
+                            total += 75000;
+                        });
+                        return total;
+                    }
+
+                    $('.box-seat').on('click', function (e) {
+                        var t = $('.selected').length;
+                        if ($(this).hasClass('selected')) {
+                            $(e.target).toggleClass("selected");
+                            setClassText('prime_seat', setPrimeSeat());
+                            setClassText('subtotal', setSubtotal());
+                        } else {
+                            if ($(this).hasClass('disabled')) {
+                                exit();
+                            }
+                            if (t >= 8) {
+                                alert("Please select no more than 8 seats");
+                            } else {
+                                $(e.target).toggleClass("selected");
+                                setClassText('prime_seat', setPrimeSeat());
+                                setClassText('subtotal', setSubtotal());
+                            }
+                        }
+
+                    });
+
+                    $("#save").on('click', function () {
+                        var request = $.ajax({
+                            url: "GetTicketServelet",
+                            method: "GET",
+                            dataType: "text",
+                            data: {
+                                prime: $('.prime_seat').text(),
+                                price: $('.price').text(),
+                                subtotal: setSubtotal()
+                            }
+                        });
+                        request.done(function (msg) {
+                            alert("dat ve thanh cong");
+                            
+                        });
+                    });
+
+                });
+        </script>
     </body>
 </html>
