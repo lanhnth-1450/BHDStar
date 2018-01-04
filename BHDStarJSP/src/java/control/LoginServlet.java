@@ -5,9 +5,10 @@
  */
 package control;
 
-import dao2.ClientDAO;
+import dao.ClientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,9 +64,9 @@ public class LoginServlet extends HttpServlet {
        String pass=request.getParameter("pa");
        Client client=(new ClientDAO()).checkLogin(email, pass);
         if (client!=null) {
-            HttpSession session=request.getSession(true);
-            session.setAttribute("client", client);
-            response.sendRedirect("index.jsp");
+            request.setAttribute("client", client);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
         }
         else{
              response.sendRedirect("invalidLogin.jsp");

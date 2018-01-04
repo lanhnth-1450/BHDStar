@@ -4,6 +4,8 @@
     Author     : Lanh
 --%>
 
+<%@page import="model.Client"%>
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +14,16 @@
         <title>JSP Page</title>
     </head>
     <body class="home blog">
-        <div class="wrapper">
+        <% String name;
+            try {
+//                name = request.getAttribute("user").toString();
+                name = "loanxu";
+
+            } catch (Exception e) {
+                name = null;
+            }
+        %>
+        <div class="wrapper" style="z-index: 99999">
             <div class="main_header fixed">
                 <div class="main_header_innor">
                     <div id="menu"></div>
@@ -62,10 +73,14 @@
                                 <a class="top--link" href="#" target="_blank">
                                         <img src="images/bhdstar-member.png">
                                 </a> -->
-                                <div class="dang-ki" >
-                                    <a href="dangnhap.jsp">
-                                        Đăng ký                                        
-                                    </a>
+                                <div class="dang-ki">
+                                    <img src="images/avatar.png" width="0px" height="20px">
+                                    <% if (name!= null) {%>
+                                    <a href="#" style="color: darkgreen; display: inline-block;"><%=name%></a>
+                                    <%} else {%>
+                                    <a href="dangnhap.jsp" style="color: darkgreen; display: inline-block;">Đăng ký</a>
+                                    <%}%>
+
 
                                 </div>
                                 <div class="top-search-form">

@@ -7,7 +7,7 @@ function initialiseMediaPlayer() {
     
     mediaPlayer = document.getElementById('video--view');
     if (mediaPlayer.style.display == 'none') {
-        mediaPlayer.pause();
+        mediaPlayer.stopVideo();
     }
     mediaPlayer.controls = false;
     document.getElementById('progress-bar').addEventListener('click', function(e) {
@@ -95,7 +95,6 @@ function fullscreen() {
 }
 
 function changeVolume(direction) {
-
     mediaPlayer.volume = direction;
 }
 
@@ -165,9 +164,16 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
 function onPlayerReady(event) {
-    event.target.playVideo();
     var dura = player.getDuration();
     durationvideo(dura);
+    if(player.style.display=='none'){
+        event.target.stopVideo();
+    }
+    else{
+        event.target.playVideo();
+    
+    }
+    
 
 }
 function stopVideo() {

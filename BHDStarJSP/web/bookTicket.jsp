@@ -4,7 +4,8 @@
     Author     : Lanh
 --%>
 
-<%@page import="control.DBConnection"%>
+
+<%@page import="controller.DBConnection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="dao2.SeatDAO"%>
 <%@page import="model.Schedule"%>

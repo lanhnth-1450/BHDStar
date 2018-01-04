@@ -5,12 +5,12 @@
  */
 package controller;
 
-import dao2.FilmDAO;
-import dao2.SeatDAO;
 import control.DBConnection;
-import dao2.RoomDAO;
-import dao2.ScheduleDAO;
-import dao2.SeatDAO;
+import dao.FilmDAO;
+import dao.SeatDAO;
+import dao.RoomDAO;
+import dao.ScheduleDAO;
+import dao.SeatDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;

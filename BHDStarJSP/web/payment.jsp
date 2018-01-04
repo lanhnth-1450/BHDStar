@@ -14,17 +14,17 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body { margin-top:20px; }
-.panel-title {display: inline;font-weight: bold;}
-.checkbox.pull-right { margin: 0; }
-.pl-ziro { padding-left: 0px; }
+            .panel-title {display: inline;font-weight: bold;}
+            .checkbox.pull-right { margin: 0; }
+            .pl-ziro { padding-left: 0px; }
         </style>
     </head>
     <body>
         <jsp:include page="view_component/header.jsp"></jsp:include>
-            <div id="wrapper" style="background: #fff1ce;    padding-top: 100px;">
-                <div class="container">
+            <div id="wrapper" style="background: #fff1ce;    padding-top: 40px; z-index: -1">
+                <div class="container" >
                     <div class="row">
-                        <div class="col-xs-12 col-md-4">
+                        <div class="col-xs-12 col-md-4" style="float: left;margin-left: 33.5%;margin-bottom: 40px;">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">

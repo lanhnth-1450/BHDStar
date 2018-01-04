@@ -6,7 +6,7 @@
 
 <%@page import="control.DBConnection"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="dao2.SeatDAO"%>
+<%@page import="dao.SeatDAO"%>
 <%@page import="model.Seat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="model.Schedule"%>
@@ -33,8 +33,8 @@
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=film.getName()%></title>
-        <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
         <link rel="stylesheet" href="css/style_LANH.css" type="text/css" />
+                <link rel="stylesheet" type="text/css" href="css/style_LOAN.css">
         <link rel="stylesheet" type="text/css" href="css/view_lichchieu_main.css">
         <link rel="stylesheet" type="text/css" href="css/stylevideo.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -53,7 +53,7 @@
         </script>-->
 
         <jsp:include page="view_component/header.jsp"></jsp:include>
-            <div id="wrapper">
+        <div id="wrapper">
                 <div class="wraper--content">
                     <div class="film--wrapper">
                         <div class="container" style="    margin-left: 90px;">

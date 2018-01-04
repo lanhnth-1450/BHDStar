@@ -5,7 +5,7 @@
  */
 package control;
 
-import dao2.ClientDAO;
+import dao.ClientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -64,10 +64,11 @@ public class SingUpServlet extends HttpServlet {
         String username=request.getParameter("name");
         String sdt=request.getParameter("phone");
         String add=request.getParameter("address");
-        Client c=new Client(username, pass, username, add, email, sdt);
+       
+        Client c=new Client(username, pass, username, add, email, sdt,null);
         if ((new ClientDAO()).singUp(c)) {
             HttpSession session=request.getSession(true);
-            session.setAttribute("clien_singup", c);
+            session.setAttribute("clien", c);
             response.sendRedirect("index.jsp");
         }
         else{

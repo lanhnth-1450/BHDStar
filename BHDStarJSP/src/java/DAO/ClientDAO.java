@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao2;
+package dao;
 
 import com.mysql.jdbc.Connection;
 import control.DBConnection;
@@ -51,7 +51,42 @@ public class ClientDAO {
                 String add = rs.getString("address");
                 String mail = rs.getString("mail");
                 String phone = rs.getString("phone");
-                c = new Client(id, username, pass, name, add, mail, phone);
+                String ava=rs.getString("avatar");
+                c = new Client(id, username, pass, name, add, mail, phone,ava);
+                return c;
+            }
+        } catch (Exception ex) {
+            System.out.println("Log In failed: An Exception has occurred! " + ex);
+            return null;
+        } //some exception handling
+        return null;
+
+    }
+    public Client getUser(int id_) {
+        Client c;
+        String searchQuery
+                = "select * from client where id='"
+                + id_;
+        try {
+            //connect to DB 
+            conn = (Connection) DBConnection.getConnection();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(searchQuery);
+            boolean more = rs.next();
+            if (!more) {
+                System.out.println("Sorry, you are not a registered user! Please sign up first");
+                return null;
+            } //if user exists set the isValid variable to true
+            else if (more) {
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String pass = rs.getString("password");
+                String name = rs.getString("name");
+                String add = rs.getString("address");
+                String mail = rs.getString("mail");
+                String phone = rs.getString("phone");
+                String ava=rs.getString("avatar");
+                c = new Client(id, username, pass, name, add, mail, phone,ava);
                 return c;
             }
         } catch (Exception ex) {
@@ -78,6 +113,12 @@ public class ClientDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ClientDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+    }
+    public static void main(String[] args) {
+      Client c=  new ClientDAO().checkLogin("loanxu@gmail.com", "1234");
+        if (c!=null) {
+            System.out.println("login");
         }
     }
 }
